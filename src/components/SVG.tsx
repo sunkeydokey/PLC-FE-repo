@@ -1,9 +1,7 @@
-type SvgImage = {
-  [key: string]: () => JSX.Element;
-};
+import type { SVGImage } from '../types/types';
 
 export const SVG = ({ name }: { name: string }) => {
-  const svgImage: SvgImage = {
+  const svgImage: SVGImage = {
     DashBoard: () => (
       <svg
         xmlns='http://www.w3.org/2000/svg'
