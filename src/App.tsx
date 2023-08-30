@@ -5,6 +5,8 @@ import { DashBoard } from './pages/DashBoard';
 import { Control } from './pages/Control';
 import { Log } from './pages/Log';
 import { Profile } from './pages/Profile';
+import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
 
 export const App = () => {
   return (
@@ -15,6 +17,8 @@ export const App = () => {
         <Route path='/control' element={<Control />} />
         <Route path='/log' element={<Log />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
       </Route>
     </Routes>
   );

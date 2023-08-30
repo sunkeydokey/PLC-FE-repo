@@ -3,20 +3,27 @@ import { NavMenu } from './components/NavMenu';
 
 export const Layout = () => {
   const links = [
-    { path: '/dashboard', name: 'DashBoard' },
-    { path: '/control', name: 'Control' },
-    { path: '/log', name: 'Log' },
-    { path: '/profile', name: 'Profile' },
+    { path: '/dashboard', name: 'DashBoard', needLogin: true },
+    { path: '/control', name: 'Control', needLogin: true },
+    { path: '/log', name: 'Log', needLogin: true },
+    { path: '/profile', name: 'Profile', needLogin: true },
+    { path: '/login', name: 'Login', needLogin: false },
+    { path: '/signup', name: 'Signup', needLogin: false },
   ];
   return (
-    <div className='flex bg-stone-800 w-screen min-h-screen select-none'>
-      <aside className='flex flex-col justify-start'>
-        <header className='font-extrabold font-mono text-6xl text-center text-yellow-500'>
-          <Link to='/'>3</Link>
+    <div className='flex bg-zinc-700 w-screen select-none'>
+      <aside className='justify-start min-h-screen hidden sm:flex sm:flex-col'>
+        <header className='font-extrabold font-mono text-4xl mx-2 my-2 text-center text-yellow-500'>
+          <Link to='/'>3⁺</Link>
         </header>
-        <nav className='h-full flex flex-col'>
+        <nav className='h-full w-full flex flex-col'>
           {links.map((link) => (
-            <NavMenu key={link.name} path={link.path} name={link.name} />
+            <NavMenu
+              key={link.name}
+              path={link.path}
+              name={link.name}
+              needLogin={link.needLogin}
+            />
           ))}
         </nav>
       </aside>
