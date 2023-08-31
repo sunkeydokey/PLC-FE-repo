@@ -9,9 +9,10 @@ export const FormInput = ({
 }: InputProps) => {
   return (
     <>
-      <div className='flex justify-center items-center w-2/3 mx-auto border-4 my-1'>
+      <div className='flex justify-center items-center w-4/5 mx-auto border-4 my-1'>
         <label className='border-r-2 basis-1/3 px-3 text-center'>{label}</label>
         <input
+          autoComplete='off'
           className='focus:outline-none basis-2/5 grow'
           {...register(label, { ...registerOptions })}
           type={type}
@@ -19,10 +20,12 @@ export const FormInput = ({
       </div>
       <div className='w-2/3 h-6 mx-auto'>
         <p className='text-sm'>
-          {formState.errors[label] && (
+          {formState.errors[label] ? (
             <span className='text-red-500'>
               {formState.errors[label]?.message}
             </span>
+          ) : (
+            ''
           )}
         </p>
       </div>

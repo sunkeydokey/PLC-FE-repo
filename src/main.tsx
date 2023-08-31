@@ -9,11 +9,11 @@ import './index.css';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <QueryClientProvider client={queryClient}>
+  <BrowserRouter>
     <RecoilRoot>
-      <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
         <App />
-      </BrowserRouter>
+      </QueryClientProvider>
     </RecoilRoot>
-  </QueryClientProvider>,
+  </BrowserRouter>,
 );

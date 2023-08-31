@@ -19,5 +19,10 @@ export type InputProps = {
   register: UseFormRegister<AuthFormValue>;
   formState: FormState<AuthFormValue>;
   registerOptions?: RegisterOptions;
-  message: string;
+};
+
+export type LoginState = {
+  isLoggedIn: boolean;
+  id: number | null;
+  name: string | null;
 };

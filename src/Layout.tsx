@@ -1,7 +1,22 @@
 import { Link, Outlet } from 'react-router-dom';
 import { NavMenu } from './components/NavMenu';
+import { useRecoilState } from 'recoil';
+import { loginState } from './states/client';
 
 export const Layout = () => {
+  const [userState, setUserState] = useRecoilState(loginState);
+
+  const name = localStorage.name;
+  const id = localStorage.id;
+  if (!userState.isLoggedIn && name && id) {
+    setUserState({
+      isLoggedIn: true,
+      name: name,
+      id: id,
+    });
+  }
+  console.log(userState);
+
   const links = [
     { path: '/dashboard', name: 'DashBoard', needLogin: true },
     { path: '/control', name: 'Control', needLogin: true },
@@ -17,14 +32,16 @@ export const Layout = () => {
           <Link to='/'>3⁺</Link>
         </header>
         <nav className='h-full w-full flex flex-col'>
-          {links.map((link) => (
-            <NavMenu
-              key={link.name}
-              path={link.path}
-              name={link.name}
-              needLogin={link.needLogin}
-            />
-          ))}
+          {links
+            .filter((link) => link.needLogin === userState.isLoggedIn)
+            .map((link) => (
+              <NavMenu
+                key={link.name}
+                path={link.path}
+                name={link.name}
+                needLogin={link.needLogin}
+              />
+            ))}
         </nav>
       </aside>
       <main className='flex grow h-full w-full'>

@@ -3,6 +3,9 @@ import type { AuthFormValue } from '../../types/types';
 import { FormInput } from './FormInput';
 import { RequestLogin } from '../api/RequestLogin';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { loginState } from '../../states/client';
+import { AxiosInstance } from '../api/CredentialAxios';
 const Regex = {
   email:
     /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+@[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+(.[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+)+$/,
@@ -10,19 +13,38 @@ const Regex = {
 
 export const LoginForm = () => {
   const { register, handleSubmit, formState } = useForm<AuthFormValue>({
-    reValidateMode: 'onChange',
+    mode: 'onChange',
     shouldUnregister: true,
     defaultValues: {
       이메일: '',
       비밀번호: '',
     },
   });
+
+  const setLoginState = useSetRecoilState(loginState);
+
   const navigate = useNavigate();
   const onSubmitHandler: SubmitHandler<AuthFormValue> = async (values) => {
     try {
-      const { data } = await RequestLogin(values);
-      console.log(data);
-      navigate('/');
+      const { data, status } = await RequestLogin(values);
+
+      if (status === 201) {
+        const { accessToken, id, name } = data;
+        AxiosInstance.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${accessToken}`;
+
+        localStorage['name'] = name;
+        localStorage['id'] = id;
+
+        setLoginState({
+          isLoggedIn: true,
+          id: id,
+          name: name,
+        });
+
+        navigate('/');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +57,6 @@ export const LoginForm = () => {
       <FormInput
         label='이메일'
         type='email'
-        message='이메일을 입력해주세요.'
         formState={formState}
         register={register}
         registerOptions={{
@@ -52,7 +73,6 @@ export const LoginForm = () => {
       <FormInput
         label='비밀번호'
         type='password'
-        message='비밀번호를 입력해주세요'
         formState={formState}
         register={register}
         registerOptions={{

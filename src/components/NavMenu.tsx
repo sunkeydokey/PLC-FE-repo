@@ -26,7 +26,7 @@ export const NavMenu = ({ path, name, needLogin }: NavProps) => {
       <div
         className={`${
           isHover ? '' : 'hidden'
-        } h-full w-32 z-10 border-none text-left absolute top-0 left-[76px] bg-cyan-500 flex items-center justify-center`}>
+        } h-full w-32 z-10 border-none text-left absolute top-0 left-[74px] bg-cyan-500 flex items-center justify-center`}>
         <p className='font-semibold text-white'>{name.toUpperCase()}</p>
       </div>
     </NavLink>

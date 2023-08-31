@@ -37,69 +37,72 @@ export const SignupForm = () => {
   };
 
   return (
-    <form
-      noValidate
-      className='flex flex-col justify-center gap-3 w-full'
-      onSubmit={handleSubmit(onSubmitHandler)}>
-      <FormInput
-        label='이름'
-        type='text'
-        message='한글 이름을 입력해주세요.'
-        formState={formState}
-        register={register}
-        registerOptions={{
-          required: {
-            value: true,
-            message: '이름을 입력해주세요.',
-          },
-          pattern: {
-            value: Regex.name,
-            message: '한글로만 이름을 입력해주세요.',
-          },
-          minLength: {
-            value: 2,
-            message: '최소 2글자 이상의 이름을 입력해주세요.',
-          },
-          maxLength: {
-            value: 10,
-            message: '최대 10글자 이하의 이름을 입력해주세요.',
-          },
-        }}
-      />
+    <section className='w-full h-full'>
+      <form
+        noValidate
+        className='flex flex-col justify-center gap-3 h-full w-full'
+        onSubmit={handleSubmit(onSubmitHandler)}>
+        <FormInput
+          label='이름'
+          type='text'
+          formState={formState}
+          register={register}
+          registerOptions={{
+            required: {
+              value: true,
+              message: '이름을 입력해주세요.',
+            },
+            pattern: {
+              value: Regex.name,
+              message: '한글로만 이름을 입력해주세요.',
+            },
+            minLength: {
+              value: 2,
+              message: '최소 2글자 이상의 이름을 입력해주세요.',
+            },
+            maxLength: {
+              value: 10,
+              message: '최대 10글자 이하의 이름을 입력해주세요.',
+            },
+          }}
+        />
 
-      <FormInput
-        label='이메일'
-        type='email'
-        message='이메일을 입력해주세요.'
-        formState={formState}
-        register={register}
-        registerOptions={{
-          required: {
-            value: true,
-            message: '이메일을 입력해주세요.',
-          },
-          pattern: {
-            value: Regex.email,
-            message: '올바른 이메일 형식을 입력해주세요.',
-          },
-        }}
-      />
+        <FormInput
+          label='이메일'
+          type='email'
+          formState={formState}
+          register={register}
+          registerOptions={{
+            required: {
+              value: true,
+              message: '이메일을 입력해주세요.',
+            },
+            pattern: {
+              value: Regex.email,
+              message: '올바른 이메일 형식을 입력해주세요.',
+            },
+          }}
+        />
 
-      <FormInput
-        label='비밀번호'
-        type='password'
-        message='비밀번호를 입력해주세요'
-        formState={formState}
-        register={register}
-        registerOptions={{
-          required: {
-            value: true,
-            message: '비밀번호를 입력해주세요.',
-          },
-        }}
-      />
-      <button type='submit'>회원가입</button>
-      {signupMessage}
-    </form>
+        <FormInput
+          label='비밀번호'
+          type='password'
+          formState={formState}
+          register={register}
+          registerOptions={{
+            required: {
+              value: true,
+              message: '비밀번호를 입력해주세요.',
+            },
+            minLength: {
+              value: 4,
+              message: '4글자 이상의 비밀번호를 입력해주세요.',
+            },
+          }}
+        />
+        <button type='submit'>회원가입</button>
+        {signupMessage}
+      </form>
+    </section>
   );
 };
