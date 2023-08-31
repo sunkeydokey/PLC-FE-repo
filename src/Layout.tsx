@@ -12,8 +12,8 @@ export const Layout = () => {
   ];
   return (
     <div className='flex bg-zinc-700 w-screen select-none'>
-      <aside className='justify-start min-h-screen hidden sm:flex sm:flex-col'>
-        <header className='font-extrabold font-mono text-4xl mx-2 my-2 text-center text-yellow-500'>
+      <aside className='justify-start min-h-screen hidden sm:flex sm:flex-col w-20'>
+        <header className='w-full font-extrabold font-mono text-4xl mx-auto my-2 text-center text-yellow-500'>
           <Link to='/'>3⁺</Link>
         </header>
         <nav className='h-full w-full flex flex-col'>
