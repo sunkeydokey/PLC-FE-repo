@@ -3,15 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { FormInput } from './FormInput';
-import { RequestSignup } from '../api/RequestSignup';
 
-import type { AuthFormValue } from '../../types/types';
+import { RequestSignup } from '@/utils/api/RequestSignup';
+import { Regex } from '@/utils/config';
+import type { AuthFormValue } from '@/types';
 
-const Regex = {
-  name: /^[가-힣]+$/,
-  email:
-    /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+@[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+(.[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+)+$/,
-};
 export const SignupForm = () => {
   const { register, handleSubmit, formState } = useForm<AuthFormValue>({
     mode: 'onChange',

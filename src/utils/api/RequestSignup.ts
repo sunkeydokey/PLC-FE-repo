@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AuthFormValue } from '../../types/types';
+import { AuthFormValue } from '@/types';
 
 export const RequestSignup = (data: AuthFormValue) =>
   axios({

@@ -1,15 +1,16 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
-import type { AuthFormValue } from '../../types/types';
-import { FormInput } from './FormInput';
-import { RequestLogin } from '../api/RequestLogin';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import { loginState } from '../../states/client';
-import { AxiosInstance } from '../api/CredentialAxios';
-const Regex = {
-  email:
-    /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+@[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+(.[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+)+$/,
-};
+import { useForm, SubmitHandler } from 'react-hook-form';
+
+import { FormInput } from '@/service/user/FormInput';
+import { RequestLogin } from '@/utils/api/RequestLogin';
+
+import type { AuthFormValue } from '@/types';
+
+import { loginState } from '@/states/client';
+
+import { AxiosInstance } from '@/utils/api/CredentialAxios';
+import { Regex } from '@/utils/config';
 
 export const LoginForm = () => {
   const { register, handleSubmit, formState } = useForm<AuthFormValue>({

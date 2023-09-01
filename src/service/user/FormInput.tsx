@@ -1,4 +1,4 @@
-import type { InputProps } from '../../types/types';
+import type { InputProps } from '@/types';
 
 export const FormInput = ({
   label,

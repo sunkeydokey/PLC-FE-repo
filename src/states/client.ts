@@ -1,4 +1,4 @@
-import type { LoginState } from './../types/types';
+import type { LoginState } from '@/types';
 import { atom } from 'recoil';
 
 export const loginState = atom<LoginState>({

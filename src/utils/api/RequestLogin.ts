@@ -1,5 +1,5 @@
-import { AxiosInstance as axios } from './CredentialAxios';
-import { AuthFormValue } from '../../types/types';
+import { AxiosInstance as axios } from '@/utils/api/CredentialAxios';
+import { AuthFormValue } from '@/types';
 
 export const RequestLogin = (data: AuthFormValue) =>
   axios({

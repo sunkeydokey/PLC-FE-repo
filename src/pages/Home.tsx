@@ -1,5 +1,3 @@
-import { Container } from '../components/Container';
-
 export const Home = () => {
-  return <Container>Home</Container>;
+  return <div>123</div>;
 };

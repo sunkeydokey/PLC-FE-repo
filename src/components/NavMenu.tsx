@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { SVG } from './SVG';
+import { SVG } from '@components/SVG';
 
-import type { NavProps } from '../types/types';
+import type { NavProps } from '@/types';
+import { LogoutButton } from '@components/buttons';
 
-export const NavMenu = ({ path, name, needLogin }: NavProps) => {
-  needLogin;
+export const NavMenu = ({ path, name }: NavProps) => {
   const BASE =
     'relative block border-none w-full h-16 flex justify-center align-center';
   const NOTACTIVE = `${BASE} hover:bg-cyan-500`;
   const ACTIVE = `${BASE} bg-cyan-600`;
 
   const [isHover, setIsHover] = useState(false);
+
+  if (name == 'Logout') return <LogoutButton />;
 
   return (
     <NavLink
@@ -26,7 +28,7 @@ export const NavMenu = ({ path, name, needLogin }: NavProps) => {
       <div
         className={`${
           isHover ? '' : 'hidden'
-        } h-full w-32 z-10 border-none text-left absolute top-0 left-[74px] bg-cyan-500 flex items-center justify-center`}>
+        } h-full w-32 border-none text-left absolute top-0 left-[70px] bg-cyan-500 flex items-center justify-center`}>
         <p className='font-semibold text-white'>{name.toUpperCase()}</p>
       </div>
     </NavLink>
