@@ -8,7 +8,9 @@ export const TopMenu = () => {
   const userState = useRecoilValue(loginState);
   const location = useLocation();
   const pageName =
-    location.pathname == '/login' || location.pathname == '/signup'
+    location.pathname == '/login' ||
+    location.pathname == '/signup' ||
+    location.pathname == '/error'
       ? ''
       : location.pathname.slice(1).toUpperCase();
 

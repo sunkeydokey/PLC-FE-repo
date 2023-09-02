@@ -1,15 +1,14 @@
 import { Link, Outlet } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { NavMenu } from './components/NavMenu';
-import { Container } from './components/Container';
-import { TopMenu } from './components/TopMenu';
+import { NavMenu } from '@components/NavMenu';
+import { Container } from '@components/Container';
+import { TopMenu } from '@components/TopMenu';
 
-import { loginState } from './states/client';
+import { loginState } from '@/states/client';
 
-import { useUserLoggedIn } from './utils/hooks';
-
-import { links } from './utils/config';
+import { useUserLoggedIn } from '@/utils/hooks';
+import { links } from '@/utils/config';
 
 export const Layout = () => {
   const userState = useRecoilValue(loginState);
