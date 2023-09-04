@@ -11,6 +11,7 @@ import { loginState } from '@/states/client';
 
 import { AxiosInstance } from '@/utils/api/CredentialAxios';
 import { Regex } from '@/utils/config';
+import { BlueButton } from '@components/buttons';
 
 export const LoginForm = () => {
   const { register, handleSubmit, formState } = useForm<AuthFormValue>({
@@ -83,7 +84,7 @@ export const LoginForm = () => {
           },
         }}
       />
-      <button type='submit'>로그인</button>
+      <BlueButton type='submit' text='로그인' />
     </form>
   );
 };

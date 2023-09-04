@@ -21,8 +21,23 @@ export type InputProps = {
   registerOptions?: RegisterOptions;
 };
 
+export type SlideProps = {
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  value: number;
+  setValue: React.Dispatch<React.SetStateAction<number>>;
+};
+
 export type LoginState = {
   isLoggedIn: boolean;
   id: number | null;
   name: string | null;
+};
+
+export type Machine = {
+  scale: number;
+  angle?: number;
+  value?: number;
 };
