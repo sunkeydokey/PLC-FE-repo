@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from './Layout';
-import { Home } from './pages/Home';
-import { DashBoard } from './pages/DashBoard';
-import { Control } from './pages/Control';
-import { Log } from './pages/Log';
-import { Profile } from './pages/Profile';
-import { Login } from './pages/Login';
-import { Signup } from './pages/Signup';
+
+import { Layout } from '@/routes/Layout';
+import { Home } from '@/routes/Home';
+import { DashBoard } from '@/routes/DashBoard';
+import { Control } from '@/routes/Control';
+import { Log } from '@/routes/Log';
+import { Profile } from '@/routes/Profile';
+import { Login } from '@/routes/Login';
+import { Signup } from '@/routes/Signup';
 
 export const App = () => {
   return (

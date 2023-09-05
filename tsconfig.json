@@ -23,10 +23,11 @@
     "baseUrl": ".",
     "typeRoots": ["./@types", "./node_modules/@types"],
     "paths": {
-      "@components/*": ["src/components/*"],
+      "@ui/*": ["src/ui/*"],
       "@/*": ["src/*"]
     }
   },
   "include": ["src", "**/*.ts", "**/*.tsx"],
+  "exclude": ["tailwind.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
