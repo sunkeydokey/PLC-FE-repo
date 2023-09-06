@@ -29,12 +29,7 @@ export const TopMenu = () => {
           {KoreanLinkDescription.filter(
             (link) => link.needLogin === userState.isLoggedIn,
           ).map((link) => (
-            <TopNavMenu
-              key={link.name}
-              path={link.path}
-              name={link.name}
-              needLogin={link.needLogin}
-            />
+            <TopNavMenu key={link.name} path={link.path} name={link.name} />
           ))}
         </nav>
       </div>

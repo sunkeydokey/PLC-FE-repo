@@ -1,7 +1,7 @@
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-import type { Machine } from '@/features/plc-control/types';
+import type { Machine } from '@/features/machine/plc-control/types';
 
 export const Skeleton = ({ scale }: Machine) => {
   const gltf = useLoader(GLTFLoader, '/gltf/Robot_Body.gltf');

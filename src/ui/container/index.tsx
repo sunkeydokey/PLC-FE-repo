@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import type { Children } from '@ui/types';
 
-export const Container = ({ children }: { children: ReactNode }) => {
+export const Container = ({ children }: Children) => {
   return (
     <div className='bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 min-h-screen w-full flex flex-col'>
       {children}

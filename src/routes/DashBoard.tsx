@@ -1,4 +1,4 @@
-import { Main } from '@/features/dashboard';
+import { Main } from '@/features/machine/dashboard';
 
 export const DashBoard = () => {
   return <Main />;

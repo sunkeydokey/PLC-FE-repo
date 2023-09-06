@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { FormInput } from '@ui/inputs/FormInput';
 import { PrimaryButton } from '@ui/buttons';
 
-import { RequestLogin } from '@/features/user/login/api/';
+import { RequestLogin } from '@/features/user/api';
 import { loginState } from '@/features/user/store';
 import { AxiosInstance } from '@/utils/lib/axios';
 import { Regex } from '@/utils/config';

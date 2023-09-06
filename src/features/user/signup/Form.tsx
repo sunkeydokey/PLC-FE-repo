@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { FormInput } from '@ui/inputs/FormInput';
 
-import { RequestSignup } from '@/features/user/signup/api';
+import { RequestSignup } from '@/features/user/api';
 import { Regex } from '@/utils/config';
 
 import type { AuthFormValue } from '@/features/user/types';

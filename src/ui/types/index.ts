@@ -1,9 +1,10 @@
+import type { ReactNode } from 'react';
+
 export type SVGImage = Record<string, () => JSX.Element>;
 
 export type NavProps = {
   path: string;
   name: string;
-  needLogin: boolean;
 };
 
 export type SlideProps = {
@@ -14,3 +15,5 @@ export type SlideProps = {
   value: number;
   setValue: React.Dispatch<React.SetStateAction<number>>;
 };
+
+export type Children = { children: ReactNode };

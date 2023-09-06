@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 
-import { FirstRobot } from '@ui/3D-Models/FirstRobot';
-import { SecondRobot } from '@ui/3D-Models/SecondRobot';
-import { ThirdRobot } from '@ui/3D-Models/ThirdRobot';
-import { Skeleton } from '@ui/3D-Models/Skeleton';
+import { FirstRobot } from '@/features/machine/components/3D-Models/FirstRobot';
+import { SecondRobot } from '@/features/machine/components/3D-Models/SecondRobot';
+import { ThirdRobot } from '@/features/machine/components/3D-Models/ThirdRobot';
+import { Skeleton } from '@/features/machine/components/3D-Models/Skeleton';
+import { MQTTConnector } from '@/features/machine/components/MQTTConnector';
 import { SlideInput } from '@ui/inputs/SlideInput';
-import { MQTTConnector } from './MQTTConnector';
 
 export const Machine = () => {
   const [scale, setScale] = useState(0.7);
@@ -18,8 +18,13 @@ export const Machine = () => {
 
   return (
     <div className='mx-auto w-11/12 mt-4 h-full flex'>
-      <MQTTConnector />
       <aside className='basis-1/4 h-full'>
+        <MQTTConnector
+          setPlatePusher={setPlatePusher}
+          setDicePusher={setDicePusher}
+          setPeekAngle={setPeekAngle}
+          setPeekHeight={setPeekHeight}
+        />
         <SlideInput
           label={'크기'}
           min={0.5}
@@ -39,7 +44,7 @@ export const Machine = () => {
         <SlideInput
           label={'2호기 다리'}
           min={0}
-          max={8}
+          max={10}
           step={1}
           value={dicePusher}
           setValue={setDicePusher}
@@ -54,7 +59,7 @@ export const Machine = () => {
         />
         <SlideInput
           label={'3호기 높이'}
-          min={3}
+          min={0}
           max={15}
           step={0.5}
           value={peekHeight}

@@ -10,10 +10,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    strictPort: true,
-    hmr: false,
-  },
+
   optimizeDeps: {
     esbuildOptions: {
       // Node.js global to browser globalThis
@@ -40,8 +37,11 @@ export default defineConfig({
   resolve: {
     alias: {
       util: 'util/',
+      mqtt: 'mqtt/dist/mqtt.js',
       '@': path.resolve(__dirname, './src'),
       '@ui': path.resolve(__dirname, './src/ui'),
+      '@static': path.resolve(__dirname, './public'),
+      '@3D': path.resolve(__dirname, './public/gltf'),
     },
   },
 });

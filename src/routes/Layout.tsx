@@ -29,7 +29,6 @@ export const Layout = () => {
                 key={link.name}
                 path={link.path}
                 name={link.name}
-                needLogin={link.needLogin}
               />
             ))}
         </nav>

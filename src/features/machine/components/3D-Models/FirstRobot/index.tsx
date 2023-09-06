@@ -1,7 +1,7 @@
-import { Body } from '@ui/3D-Models/FirstRobot/model/Body';
-import { Pusher } from '@ui/3D-Models/FirstRobot/model/Pusher';
+import { Body } from '@/features/machine/components/3D-Models/FirstRobot/model/Body';
+import { Pusher } from '@/features/machine/components/3D-Models/FirstRobot/model/Pusher';
 
-import type { Machine } from '@/features/plc-control/types';
+import type { Machine } from '@/features/machine/plc-control/types';
 
 export const FirstRobot = ({ scale, value }: Machine) => {
   return (

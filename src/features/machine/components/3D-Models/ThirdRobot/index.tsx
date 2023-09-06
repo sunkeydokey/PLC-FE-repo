@@ -1,11 +1,11 @@
 import { Circle } from '@react-three/drei';
 
-import { Body } from '@ui/3D-Models/ThirdRobot/model/Body';
-import { Peeker } from '@ui/3D-Models/ThirdRobot/model/Peeker';
-import { PeekerX } from '@ui/3D-Models/ThirdRobot/model/PeekerX';
-import { PeekerY } from '@ui/3D-Models/ThirdRobot/model/PeekerY';
+import { Body } from '@/features/machine/components/3D-Models/ThirdRobot/model/Body';
+import { Peeker } from '@/features/machine/components/3D-Models/ThirdRobot/model/Peeker';
+import { PeekerX } from '@/features/machine/components/3D-Models/ThirdRobot/model/PeekerX';
+import { PeekerY } from '@/features/machine/components/3D-Models/ThirdRobot/model/PeekerY';
 
-import type { Machine } from '@/features/plc-control/types';
+import type { Machine } from '@/features/machine/plc-control/types';
 
 export const ThirdRobot = ({ scale, angle, value }: Machine) => {
   return (

@@ -1,4 +1,4 @@
-import { Machine } from '@/features/plc-control';
+import { Machine } from '@/features/machine/plc-control';
 
 export const Control = () => {
   return <Machine />;
