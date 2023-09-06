@@ -18,7 +18,7 @@ export const MQTTConnector = ({
     client?.publish(
       'edukit/control',
       JSON.stringify({ tagId: '1', value: '1' }),
-      { qos: 0, retain: false },
+      { qos: 2, retain: false },
       (error) => {
         if (error) console.log(error);
       },
@@ -29,7 +29,7 @@ export const MQTTConnector = ({
     client?.publish(
       'edukit/control',
       JSON.stringify({ tagId: '1', value: '0' }),
-      { qos: 0, retain: false },
+      { qos: 2, retain: false },
       (error) => {
         if (error) console.log(error);
       },
@@ -39,12 +39,10 @@ export const MQTTConnector = ({
   useEffect(() => {
     const client = connect('mqtt://192.168.0.128', {
       port: 8888,
-      clientId: Math.random().toString(),
       protocol: 'ws',
     });
 
     client.on('connect', () => {
-      console.log('client connected');
       setIsConnected(true);
       client.subscribe(
         'edukit/robotarm',
@@ -72,7 +70,6 @@ export const MQTTConnector = ({
 
     client.on('message', (_topic, message) => {
       const { Wrapper } = JSON.parse(message.toString());
-      console.log(Wrapper);
 
       const [isFirstPushing, isDiceReady, height, angle] = [
         Wrapper[2].value,
@@ -80,15 +77,17 @@ export const MQTTConnector = ({
         Wrapper[34].value,
         Wrapper[35].value,
       ];
+
       const scaledAngle = (Number(angle) / 18000000) * 65 + 20;
       const scaledHeight = (Number(height) / 1150000) * 15;
+
       setPlatePusher(isFirstPushing ? 10 : 0);
       setDicePusher(isDiceReady ? 10 : 0);
-      setPeekAngle(scaledAngle);
-      setPeekHeight(scaledHeight);
+
+      if (scaledAngle >= 20 && scaledAngle <= 85) setPeekAngle(scaledAngle);
+      if (scaledHeight >= 0 && scaledHeight <= 15) setPeekHeight(scaledHeight);
     });
     setClient(client);
-    console.log('at setClient', client);
     return () => {
       client.end();
     };
@@ -96,21 +95,23 @@ export const MQTTConnector = ({
 
   return (
     <div className='mb-4'>
-      <h2 className='text-white font-bold text-lg mb-4'>
+      <h2 className='text-center text-white font-bold text-lg mb-4'>
         {isConnected ? '기기 연결 완료' : '기기 연결 요청 중'}
       </h2>
-      <button
-        onClick={handleMachineMove}
-        disabled={!isConnected}
-        className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
-        작동
-      </button>
-      <button
-        onClick={handleMachineStop}
-        disabled={!isConnected}
-        className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
-        정지
-      </button>
+      <section className='flex justify-around'>
+        <button
+          onClick={handleMachineMove}
+          disabled={!isConnected}
+          className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
+          작동
+        </button>
+        <button
+          onClick={handleMachineStop}
+          disabled={!isConnected}
+          className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
+          정지
+        </button>
+      </section>
     </div>
   );
 };
