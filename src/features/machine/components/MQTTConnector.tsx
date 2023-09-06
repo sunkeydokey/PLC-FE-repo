@@ -4,12 +4,19 @@ import { connect } from 'mqtt';
 import type { MqttClient } from 'mqtt';
 
 export const MQTTConnector = ({
+  isOnMove,
+  setIsOnMove,
   setPlatePusher,
   setDicePusher,
   setPeekAngle,
   setPeekHeight,
 }: {
-  [key: string]: React.Dispatch<React.SetStateAction<number>>;
+  isOnMove: boolean;
+  setIsOnMove: React.Dispatch<React.SetStateAction<boolean>>;
+  setPlatePusher: React.Dispatch<React.SetStateAction<number>>;
+  setDicePusher: React.Dispatch<React.SetStateAction<number>>;
+  setPeekAngle: React.Dispatch<React.SetStateAction<number>>;
+  setPeekHeight: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [client, setClient] = useState<MqttClient>();
@@ -20,7 +27,22 @@ export const MQTTConnector = ({
       JSON.stringify({ tagId: '1', value: '1' }),
       { qos: 2, retain: false },
       (error) => {
+        setIsOnMove(true);
         if (error) console.log(error);
+      },
+    );
+    client?.subscribe(
+      'edukit/robotarm',
+      {
+        qos: 0,
+        rap: false,
+        rh: 0,
+      },
+      (error) => {
+        if (error) {
+          console.log('MQTT Subscribe to topics error', error);
+          return;
+        }
       },
     );
   };
@@ -31,9 +53,11 @@ export const MQTTConnector = ({
       JSON.stringify({ tagId: '1', value: '0' }),
       { qos: 2, retain: false },
       (error) => {
+        setIsOnMove(false);
         if (error) console.log(error);
       },
     );
+    client?.unsubscribe('edukit/robotarm');
   };
 
   useEffect(() => {
@@ -44,20 +68,6 @@ export const MQTTConnector = ({
 
     client.on('connect', () => {
       setIsConnected(true);
-      client.subscribe(
-        'edukit/robotarm',
-        {
-          qos: 0,
-          rap: false,
-          rh: 0,
-        },
-        (error) => {
-          if (error) {
-            console.log('MQTT Subscribe to topics error', error);
-            return;
-          }
-        },
-      );
     });
 
     client.on('error', (err) => {
@@ -101,13 +111,13 @@ export const MQTTConnector = ({
       <section className='flex justify-around'>
         <button
           onClick={handleMachineMove}
-          disabled={!isConnected}
+          disabled={!isConnected || isOnMove}
           className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
           작동
         </button>
         <button
           onClick={handleMachineStop}
-          disabled={!isConnected}
+          disabled={!isConnected || !isOnMove}
           className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
           정지
         </button>
