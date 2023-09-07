@@ -37,7 +37,6 @@ export default defineConfig({
   resolve: {
     alias: {
       util: 'util/',
-      mqtt: 'mqtt/dist/mqtt.js',
       '@': path.resolve(__dirname, './src'),
       '@ui': path.resolve(__dirname, './src/ui'),
       '@static': path.resolve(__dirname, './public'),

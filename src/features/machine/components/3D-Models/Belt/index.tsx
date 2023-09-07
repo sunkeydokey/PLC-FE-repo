@@ -3,28 +3,17 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useLoader } from '@react-three/fiber';
 import { useAnimations } from '@react-three/drei';
 
-import type { Vector3 } from '@react-three/fiber';
 import type { Mesh } from 'three';
 
-export const Belt = ({
-  scale,
-  isOnMove,
-}: {
-  scale: Vector3;
-  isOnMove: boolean;
-}) => {
+export const Belt = ({ isOnMove }: { isOnMove: boolean }) => {
   const { scene, animations } = useLoader(GLTFLoader, '/gltf/Robot_Belt.glb');
   const ref = useRef<Mesh>(null);
 
-  const {
-    // mixer,
-    actions,
-    // clips
-  } = useAnimations(animations, ref);
+  const { actions } = useAnimations(animations, ref);
 
   useEffect(() => {
-    if (isOnMove) actions['Key.005Action.003']?.play();
-    if (!isOnMove) actions['Key.005Action.003']?.stop();
+    if (isOnMove as boolean) actions['Key.005Action.003']?.play();
+    if (!(isOnMove as boolean)) actions['Key.005Action.003']?.stop();
 
     return () => {
       actions['Key.005Action.003']?.stop();
@@ -34,7 +23,7 @@ export const Belt = ({
   return (
     <mesh
       ref={ref}
-      scale={scale}
+      scale={[10.2, 9, 9]}
       position-z={-1}
       position-y={-0.8}
       position-x={0.8}

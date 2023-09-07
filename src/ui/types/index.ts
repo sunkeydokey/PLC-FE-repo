@@ -17,3 +17,4 @@ export type SlideProps = {
 };
 
 export type Children = { children: ReactNode };
+export type ButtonType = 'button' | 'submit' | 'reset' | undefined;

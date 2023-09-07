@@ -1,16 +1,11 @@
 import { useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-// import { Bar } from 'react-chartjs-2';
+import ReactApexChart from 'react-apexcharts';
 
-import { FirstRobot } from '@/features/machine/components/3D-Models/FirstRobot';
-import { SecondRobot } from '@/features/machine/components/3D-Models/SecondRobot';
-import { ThirdRobot } from '@/features/machine/components/3D-Models/ThirdRobot';
-import { Skeleton } from '@/features/machine/components/3D-Models/Skeleton';
-import { MQTTConnector } from '@/features/machine/components/MQTTConnector';
+import { Connector } from '@/features/machine/components/Connector';
+
+import { Model } from '@/features/machine/components/3D-Models';
+
 import { SlideInput } from '@ui/inputs/SlideInput';
-import { Belt } from '../components/3D-Models/Belt';
-// import { ChartCard } from '@ui/cards/ChartCard';
 
 export const Machine = () => {
   const [scale, setScale] = useState(0.7);
@@ -21,9 +16,9 @@ export const Machine = () => {
   const [peekHeight, setPeekHeight] = useState(0);
 
   return (
-    <div className='mx-auto w-11/12 mt-4 h-full flex'>
-      <aside className='basis-1/4 h-full'>
-        <MQTTConnector
+    <div className='mx-auto w-full mt-4 h-full flex'>
+      <aside className='mx-4 w-80 h-full flex flex-col justify-start'>
+        <Connector
           isOnMove={isOnMove}
           setIsOnMove={setIsOnMove}
           setPlatePusher={setPlatePusher}
@@ -71,32 +66,60 @@ export const Machine = () => {
           value={peekHeight}
           setValue={setPeekHeight}
         />
-        {/* <ChartCard>
-          <Bar
-            data={{
-              datasets: [
-                {
-                  data: [20, 10],
-                },
-              ],
-              labels: ['a', 'b'],
+        <div className='w-full h-full'>
+          <ReactApexChart
+            options={{
+              xaxis: {
+                categories: [1, 2, 3, 4, 5, 6],
+              },
+              plotOptions: {
+                bar: { horizontal: true },
+              },
             }}
+            series={[
+              {
+                data: [
+                  {
+                    x: 'Category A',
+                    y: 21,
+                  },
+                  {
+                    x: 'Category B',
+                    y: 32,
+                  },
+                  {
+                    x: 'Category C',
+                    y: 53,
+                  },
+                  {
+                    x: 'Category D',
+                    y: 42,
+                  },
+                  {
+                    x: 'Category E',
+                    y: 32,
+                  },
+                  {
+                    x: 'Category F',
+                    y: 53,
+                  },
+                ],
+              },
+            ]}
+            type='bar'
+            height={'90%'}
           />
-        </ChartCard> */}
+        </div>
       </aside>
       <section className='w-full h-full grow'>
-        <Canvas>
-          <directionalLight position={[1, 1, 1]} />
-
-          <OrbitControls />
-          <mesh scale={scale} rotation-x={(30 * Math.PI) / 180}>
-            <Skeleton scale={0.1} />
-            <Belt isOnMove={isOnMove} scale={[10.2, 9, 9]} />
-            <FirstRobot scale={0.1} value={platePusher} />
-            <SecondRobot scale={0.1} value={dicePusher} />
-            <ThirdRobot scale={0.1} angle={-peekAngle} value={peekHeight} />
-          </mesh>
-        </Canvas>
+        <Model
+          scale={scale}
+          isOnMove={isOnMove}
+          platePusher={platePusher}
+          dicePusher={dicePusher}
+          peekAngle={peekAngle}
+          peekHeight={peekHeight}
+        />
       </section>
     </div>
   );

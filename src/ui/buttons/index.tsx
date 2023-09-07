@@ -1,4 +1,4 @@
-type ButtonType = 'button' | 'submit' | 'reset' | undefined;
+import { ButtonType } from '@ui/types';
 
 export const PrimaryButton = ({
   text,

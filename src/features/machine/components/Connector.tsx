@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'mqtt';
 
+import { ConditionalButton } from '@ui/buttons/ConditionalButton';
+
 import type { MqttClient } from 'mqtt';
 
-export const MQTTConnector = ({
+export const Connector = ({
   isOnMove,
   setIsOnMove,
   setPlatePusher,
@@ -19,18 +21,20 @@ export const MQTTConnector = ({
   setPeekHeight: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [isConnected, setIsConnected] = useState(false);
+  const [isSubscribing, setIsSubscribing] = useState(false);
   const [client, setClient] = useState<MqttClient>();
-
   const handleMachineMove = () => {
     client?.publish(
       'edukit/control',
       JSON.stringify({ tagId: '1', value: '1' }),
       { qos: 2, retain: false },
       (error) => {
-        setIsOnMove(true);
         if (error) console.log(error);
       },
     );
+  };
+
+  const handleSubscribe = () => {
     client?.subscribe(
       'edukit/robotarm',
       {
@@ -39,6 +43,7 @@ export const MQTTConnector = ({
         rh: 0,
       },
       (error) => {
+        setIsSubscribing(true);
         if (error) {
           console.log('MQTT Subscribe to topics error', error);
           return;
@@ -57,7 +62,10 @@ export const MQTTConnector = ({
         if (error) console.log(error);
       },
     );
+  };
+  const handleUnsubscribe = () => {
     client?.unsubscribe('edukit/robotarm');
+    setIsSubscribing(false);
   };
 
   useEffect(() => {
@@ -88,6 +96,8 @@ export const MQTTConnector = ({
         Wrapper[35].value,
       ];
 
+      setIsOnMove(Wrapper[0].value);
+
       const scaledAngle = (Number(angle) / 18000000) * 65 + 20;
       const scaledHeight = (Number(height) / 1150000) * 15;
 
@@ -101,26 +111,38 @@ export const MQTTConnector = ({
     return () => {
       client.end();
     };
-  }, [setPlatePusher, setDicePusher, setPeekAngle, setPeekHeight]);
+  }, [setIsOnMove, setPlatePusher, setDicePusher, setPeekAngle, setPeekHeight]);
 
   return (
     <div className='mb-4'>
       <h2 className='text-center text-white font-bold text-lg mb-4'>
         {isConnected ? '기기 연결 완료' : '기기 연결 요청 중'}
       </h2>
-      <section className='flex justify-around'>
-        <button
+      <section className='flex justify-around text-sm font-bold'>
+        <ConditionalButton
           onClick={handleMachineMove}
-          disabled={!isConnected || isOnMove}
-          className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
-          작동
-        </button>
-        <button
+          condition={!isConnected || isOnMove}
+          text='동작'
+          type='button'
+        />
+        <ConditionalButton
+          onClick={handleSubscribe}
+          condition={!isConnected || isSubscribing}
+          text='동기화'
+          type='button'
+        />
+        <ConditionalButton
           onClick={handleMachineStop}
-          disabled={!isConnected || !isOnMove}
-          className='rounded-md px-4 py-2 bg-white disabled:bg-slate-600 disabled:text-white'>
-          정지
-        </button>
+          condition={!isConnected || !isOnMove}
+          text='정지'
+          type='button'
+        />
+        <ConditionalButton
+          onClick={handleUnsubscribe}
+          condition={!isConnected || !isSubscribing}
+          text='해제'
+          type='button'
+        />
       </section>
     </div>
   );

@@ -16,7 +16,8 @@ dist-ssr
 *.env
 
 # GLTF Files
-public/gltf/*.gltf
+public/gltf/*
+
 
 # Editor directories and files
 .vscode/*
