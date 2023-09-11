@@ -1,27 +1,24 @@
 import { Link, Outlet } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
 import { Container } from '@ui/container';
 import { LayoutNavMenu } from '@ui/menuItems/LayoutNavMenu';
 import { TopMenu } from '@ui/navbars/TopMenu';
 
-import { loginState } from '@/features/user/store';
 import { useUserLoggedIn } from '@/features/user/hooks';
 
 import { links } from '@/utils/config';
+import { Wrapper } from '@ui/wrapper';
 
-export const Layout = () => {
-  const userState = useRecoilValue(loginState);
-
-  useUserLoggedIn();
+export const Layout = ({ needLogin }: { needLogin: boolean }) => {
+  const userState = useUserLoggedIn(needLogin);
 
   return (
     <div className='flex bg-zinc-700 w-screen select-none'>
-      <aside className='justify-start min-h-screen hidden sm:flex sm:flex-col w-[70px]'>
+      <aside className='justify-start min-h-screen flex flex-col'>
         <header className='w-[70px] font-extrabold font-mono text-4xl mx-auto my-2 text-center text-yellow-500'>
           <Link to='/'>3⁺</Link>
         </header>
-        <nav className='h-full w-[70px] flex flex-col'>
+        <nav className='h-full flex flex-col'>
           {links
             .filter((link) => link.needLogin === userState.isLoggedIn)
             .map((link) => (
@@ -33,10 +30,12 @@ export const Layout = () => {
             ))}
         </nav>
       </aside>
-      <main className='flex grow h-full w-full'>
+      <main className='flex h-full w-full'>
         <Container>
           <TopMenu />
-          <Outlet />
+          <Wrapper>
+            <Outlet />
+          </Wrapper>
         </Container>
       </main>
     </div>

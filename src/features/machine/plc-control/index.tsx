@@ -7,7 +7,7 @@ import { Model } from '@/features/machine/components/3D-Models';
 
 import { SlideInput } from '@ui/inputs/SlideInput';
 
-export const Machine = () => {
+export const Main = () => {
   const [scale, setScale] = useState(0.7);
   const [isOnMove, setIsOnMove] = useState(false);
   const [platePusher, setPlatePusher] = useState(0);
@@ -16,7 +16,7 @@ export const Machine = () => {
   const [peekHeight, setPeekHeight] = useState(0);
 
   return (
-    <div className='mx-auto w-full mt-4 h-full flex'>
+    <div className='w-full h-full flex'>
       <aside className='mx-4 w-80 h-full flex flex-col justify-start'>
         <Connector
           isOnMove={isOnMove}
@@ -111,7 +111,7 @@ export const Machine = () => {
           />
         </div>
       </aside>
-      <section className='w-full h-full grow'>
+      <section className='h-full grow'>
         <Model
           scale={scale}
           isOnMove={isOnMove}

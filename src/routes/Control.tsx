@@ -1,5 +1,5 @@
-import { Machine } from '@/features/machine/plc-control';
+import { Main } from '@/features/machine/plc-control';
 
 export const Control = () => {
-  return <Machine />;
+  return <Main />;
 };

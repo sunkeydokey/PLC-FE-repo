@@ -1,3 +1,5 @@
+import { Main } from '@/features/log';
+
 export const Log = () => {
-  return <div>Log</div>;
+  return <Main />;
 };

@@ -17,7 +17,7 @@ export const useLogout = () => {
   return Logout;
 };
 
-export const useUserLoggedIn = () => {
+export const useUserLoggedIn = (needLogin: boolean = false) => {
   const [userState, setUserState] = useRecoilState(loginState);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -25,16 +25,6 @@ export const useUserLoggedIn = () => {
   useEffect(() => {
     const name = localStorage.name;
     const id = localStorage.id;
-    const needLogin: {
-      [key: string]: boolean;
-    } = {
-      dashboard: true,
-      log: true,
-      control: true,
-      profile: true,
-      login: false,
-      signup: false,
-    };
 
     if (!userState.isLoggedIn && name && id) {
       setUserState({
@@ -47,9 +37,11 @@ export const useUserLoggedIn = () => {
 
     if (pathname == '/') return;
 
-    if (needLogin[pathname.slice(1)] != userState.isLoggedIn) {
+    if (needLogin != userState.isLoggedIn) {
       navigate('/');
       return;
     }
-  }, [setUserState, userState.isLoggedIn, navigate, pathname]);
+  }, [setUserState, userState.isLoggedIn, needLogin, navigate, pathname]);
+
+  return userState;
 };
