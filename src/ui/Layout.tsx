@@ -13,8 +13,8 @@ export const Layout = ({ needLogin }: { needLogin: boolean }) => {
   const userState = useUserLoggedIn(needLogin);
 
   return (
-    <div className='flex bg-zinc-700 w-screen select-none'>
-      <aside className='justify-start min-h-screen flex flex-col'>
+    <div className='flex bg-zinc-700 w-screen min-h-screen select-none'>
+      <aside className='justify-start flex flex-col'>
         <header className='w-[70px] font-extrabold font-mono text-4xl mx-auto my-2 text-center text-yellow-500'>
           <Link to='/'>3⁺</Link>
         </header>
@@ -30,7 +30,7 @@ export const Layout = ({ needLogin }: { needLogin: boolean }) => {
             ))}
         </nav>
       </aside>
-      <main className='flex h-full w-full'>
+      <main className='flex w-full'>
         <Container>
           <TopMenu />
           <Wrapper>

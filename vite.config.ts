@@ -13,7 +13,7 @@ export default defineConfig({
 
   optimizeDeps: {
     include: ['esm-dep > cjs-dep'],
-
+    exclude: ['js-big-decimal'],
     esbuildOptions: {
       // Node.js global to browser globalThis
       define: {

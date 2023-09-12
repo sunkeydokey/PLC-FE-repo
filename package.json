@@ -14,7 +14,6 @@
     "@react-three/drei": "^9.80.9",
     "@react-three/fiber": "^8.13.7",
     "@tanstack/react-query": "^4.33.0",
-    "@types/react-infinite-scroller": "^1.2.3",
     "@types/three": "^0.155.1",
     "apexcharts": "^3.42.0",
     "axios": "^1.5.0",
@@ -23,10 +22,10 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
-    "react-infinite-scroller": "^1.2.6",
     "react-router-dom": "^6.15.0",
     "recoil": "^0.7.7",
-    "three": "^0.156.0"
+    "three": "^0.156.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",

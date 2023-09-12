@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
 
 import { Connector } from '@/features/machine/components/Connector';
 
@@ -66,50 +65,6 @@ export const Main = () => {
           value={peekHeight}
           setValue={setPeekHeight}
         />
-        <div className='w-full h-full'>
-          <ReactApexChart
-            options={{
-              xaxis: {
-                categories: [1, 2, 3, 4, 5, 6],
-              },
-              plotOptions: {
-                bar: { horizontal: true },
-              },
-            }}
-            series={[
-              {
-                data: [
-                  {
-                    x: 'Category A',
-                    y: 21,
-                  },
-                  {
-                    x: 'Category B',
-                    y: 32,
-                  },
-                  {
-                    x: 'Category C',
-                    y: 53,
-                  },
-                  {
-                    x: 'Category D',
-                    y: 42,
-                  },
-                  {
-                    x: 'Category E',
-                    y: 32,
-                  },
-                  {
-                    x: 'Category F',
-                    y: 53,
-                  },
-                ],
-              },
-            ]}
-            type='bar'
-            height={'90%'}
-          />
-        </div>
       </aside>
       <section className='h-full grow'>
         <Model

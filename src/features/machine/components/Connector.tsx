@@ -23,6 +23,7 @@ export const Connector = ({
   const [isConnected, setIsConnected] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [client, setClient] = useState<MqttClient>();
+
   const handleMachineMove = () => {
     client?.publish(
       'edukit/control',
@@ -90,7 +91,7 @@ export const Connector = ({
       const { Wrapper } = JSON.parse(message.toString());
 
       const [isFirstPushing, isDiceReady, height, angle] = [
-        Wrapper[2].value,
+        Wrapper[7].value,
         Wrapper[18].value,
         Wrapper[34].value,
         Wrapper[35].value,
@@ -126,15 +127,15 @@ export const Connector = ({
           type='button'
         />
         <ConditionalButton
-          onClick={handleSubscribe}
-          condition={!isConnected || isSubscribing}
-          text='동기화'
-          type='button'
-        />
-        <ConditionalButton
           onClick={handleMachineStop}
           condition={!isConnected || !isOnMove}
           text='정지'
+          type='button'
+        />
+        <ConditionalButton
+          onClick={handleSubscribe}
+          condition={!isConnected || isSubscribing}
+          text='동기화'
           type='button'
         />
         <ConditionalButton
@@ -144,6 +145,7 @@ export const Connector = ({
           type='button'
         />
       </section>
+      <section></section>
     </div>
   );
 };

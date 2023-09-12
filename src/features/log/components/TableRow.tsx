@@ -12,7 +12,7 @@ export const TableRow = ({ values }: { values: LogColumns }) => {
     Start,
   } = values;
   return (
-    <li className='flex justify-between'>
+    <li className='flex justify-between border hover:border-sky-600'>
       <RowBlock isError={false} value={Datetime} />
       <RowBlock isError={false} value={Dicevalue} />
       <RowBlock isError={false} value={No1Action} />

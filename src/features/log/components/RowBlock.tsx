@@ -7,7 +7,7 @@ export const RowBlock = ({
 }) => {
   return (
     <div
-      className={` basis-auto text-center border w-full ${
+      className={`basis-auto text-center border border-stone-600 w-full ${
         isError && 'bg-yellow-200'
       }`}>
       {value}

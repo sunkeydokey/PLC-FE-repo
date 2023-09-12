@@ -17,7 +17,7 @@ export const TopMenu = () => {
       : location.pathname.slice(1).toUpperCase();
 
   return (
-    <div className='flex justify-between mt-4 mx-5'>
+    <div className='flex justify-between py-4 mx-5 items-center'>
       <h2 className='text-white font-extrabold text-2xl'>{pageName}</h2>
       <div className='flex justify-end gap-5'>
         {userState.isLoggedIn && (
