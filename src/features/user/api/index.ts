@@ -1,4 +1,4 @@
-import { AxiosInstance as axios } from '@/utils/lib/axios';
+import { AxiosInstanceToNest as axios } from '@/utils/lib/axios';
 
 import type { AuthFormValue } from '@/features/user/types';
 

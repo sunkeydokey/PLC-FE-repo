@@ -16,7 +16,7 @@ export const SlideInput = ({
     <div className='mb-2'>
       <label
         htmlFor='minmax-range'
-        className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
+        className='block mb-2 text-sm font-medium text-stone-200'>
         {label}
       </label>
       <input
@@ -27,7 +27,7 @@ export const SlideInput = ({
         value={value}
         onChange={handleChange}
         step={step}
-        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700'
+        className='w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-700'
       />
     </div>
   );

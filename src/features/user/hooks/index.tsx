@@ -3,13 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useResetRecoilState, useRecoilState } from 'recoil';
 
 import { loginState } from '@/features/user/store';
-import { AxiosInstance } from '@/utils/lib/axios';
+import { AxiosInstanceToNest as axios } from '@/utils/lib/axios';
 
 export const useLogout = () => {
   const navigate = useNavigate();
   const resetLoginState = useResetRecoilState(loginState);
   const Logout = () => {
-    AxiosInstance.defaults.headers.common['Authorization'] = '';
+    axios.defaults.headers.common['Authorization'] = '';
     localStorage.clear();
     resetLoginState();
     navigate('/');

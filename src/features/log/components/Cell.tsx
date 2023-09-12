@@ -1,4 +1,4 @@
-export const RowBlock = ({
+export const Cell = ({
   value,
   isError = false,
 }: {

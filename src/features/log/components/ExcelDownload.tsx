@@ -18,10 +18,12 @@ export const ExcelDownload = ({ data }: { data: LogColumns[][] }) => {
   }, [excelData]);
 
   return (
-    <button
-      className='px-4 mb-4 text-lg text-stone-200 border rounded-md font-bold hover:bg-stone-200 hover:text-inherit'
-      onClick={exportFile}>
-      ExcelDownload
-    </button>
+    <section className='flex justify-end items-center mr-4'>
+      <button
+        className='px-4 mb-4 text-lg text-stone-200 border rounded-md font-bold hover:bg-stone-200 hover:text-inherit'
+        onClick={exportFile}>
+        다운로드
+      </button>
+    </section>
   );
 };

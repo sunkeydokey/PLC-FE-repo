@@ -7,7 +7,7 @@ import { PrimaryButton } from '@ui/buttons';
 
 import { RequestLogin } from '@/features/user/api';
 import { loginState } from '@/features/user/store';
-import { AxiosInstance } from '@/utils/lib/axios';
+import { AxiosInstanceToNest as axios } from '@/utils/lib/axios';
 import { Regex } from '@/utils/config';
 
 import type { AuthFormValue } from '@/features/user/types';
@@ -31,7 +31,7 @@ export const LoginForm = () => {
 
       if (status === 201) {
         const { accessToken, id, name } = data;
-        AxiosInstance.defaults.headers.common[
+        axios.defaults.headers.common[
           'Authorization'
         ] = `Bearer ${accessToken}`;
 
