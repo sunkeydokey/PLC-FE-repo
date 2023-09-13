@@ -3,7 +3,7 @@ import type { Children } from '@ui/types';
 export const ChartCard = ({ children }: Children) => {
   return (
     <article
-      className={`w-full h-full shadow-lg shadow-slate-800 border-none rounded-md`}>
+      className={`shadow-xl bg-stone-100/10 shadow-stone-800 border border-opacity-30 border-stone-700 rounded-md`}>
       {children}
     </article>
   );

@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { FormInput } from '@ui/inputs/FormInput';
-import { PrimaryButton } from '@ui/buttons';
+import { Button } from '@ui/buttons';
 
 import { RequestLogin } from '@/features/user/api';
 import { loginState } from '@/features/user/store';
@@ -83,7 +83,7 @@ export const LoginForm = () => {
           },
         }}
       />
-      <PrimaryButton type='submit' text='로그인' />
+      <Button isPrimary={true} type='submit' text='로그인' />
     </form>
   );
 };

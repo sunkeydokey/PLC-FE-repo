@@ -3,7 +3,7 @@ import axios from 'axios';
 export const AxiosInstanceToFlask = axios.create({
   baseURL: import.meta.env.PROD
     ? import.meta.env.VITE_FLASK_API_URL
-    : 'http://192.168.0.38:5001/',
+    : 'http://192.168.0.128:5001/',
   withCredentials: true,
 });
 

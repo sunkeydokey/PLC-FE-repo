@@ -8,6 +8,7 @@ import { RequestSignup } from '@/features/user/api';
 import { Regex } from '@/utils/config';
 
 import type { AuthFormValue } from '@/features/user/types';
+import { Button } from '@ui/buttons';
 
 export const SignupForm = () => {
   const { register, handleSubmit, formState } = useForm<AuthFormValue>({
@@ -97,7 +98,7 @@ export const SignupForm = () => {
             },
           }}
         />
-        <button type='submit'>회원가입</button>
+        <Button isPrimary={true} text='회원가입' type='submit' />
         {signupMessage}
       </form>
     </section>

@@ -13,5 +13,5 @@ export const requestTrackLogDetail = async (trackId: string | number) => {
     method: 'GET',
     url: `/tracklog?track_id=${trackId}`,
   });
-  return data.results;
+  return data;
 };

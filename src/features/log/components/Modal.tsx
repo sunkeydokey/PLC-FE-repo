@@ -20,6 +20,7 @@ export const Modal = ({
   );
 
   const [timeline, setTimeline] = useState(0);
+  const [isOkay, setIsOkay] = useState(true);
   const [action, setAction] = useState<{ [key: string]: number }>({
     No1Action: 0,
     No2InPoint: 0,
@@ -29,7 +30,8 @@ export const Modal = ({
 
   useEffect(() => {
     if (!data) return;
-    setAction(data[timeline]);
+    setAction(data.results[timeline]);
+    setIsOkay(data.dice > 1 && data.dice < 6 && data.radiation <= 70);
   }, [data, timeline]);
 
   const closeModal = () => setIsVisible(false);
@@ -42,7 +44,7 @@ export const Modal = ({
           className='fixed bg-stone-800/80 inset-0 flex items-center justify-center z-50'>
           <div
             onClick={(event) => event.stopPropagation()}
-            className='bg-stone-800 w-1/2 h-4/5 rounded-lg p-8 shadow-lg'>
+            className='bg-stone-800 w-1/2 h-4/5 rounded-lg p-8 shadow-lg relative'>
             {isLoading || isError ? (
               isError ? (
                 '에러'
@@ -51,19 +53,73 @@ export const Modal = ({
               )
             ) : (
               <>
+                <section className='absolute right-0 top-0 z-50 justify-center'>
+                  <button
+                    onClick={closeModal}
+                    className='px-4 py-2 text-white font-extrabold text-2xl'>
+                    X
+                  </button>
+                </section>
                 <section className='w-full'>
                   <h2 className='text-xl w-full font-bold mb-4 text-stone-200'>{`${TrackId}번 공정 기록`}</h2>
-                  <p className='text-stone-200 mb-4'>{action.Datetime}</p>
+
+                  <article className='flex justify-end gap-4'>
+                    <div>
+                      <span className='text-stone-200 mb-4'>
+                        {action.Datetime}
+                      </span>
+                    </div>
+                    <div>
+                      <p className='text-stone-200'>
+                        용량:{' '}
+                        <span
+                          className={`${
+                            data.dice && data.dice > 1 && data.dice < 6
+                              ? 'text-green-500'
+                              : 'text-red-500 animate-pulse'
+                          } font-bold`}>
+                          {data.dice || '신호 불량'}
+                        </span>
+                      </p>
+                    </div>
+                    <div>
+                      <p className='text-stone-200'>
+                        오염도:{' '}
+                        <span
+                          className={`${
+                            data.radiation && data.radiation <= 70
+                              ? 'text-green-500'
+                              : 'text-red-500 animate-pulse'
+                          } font-bold`}>
+                          {data.radiation || '신호 불량'}
+                        </span>
+                      </p>
+                    </div>
+                    <div
+                      className={`border px-1 rounded ${
+                        isOkay
+                          ? 'border-green-500'
+                          : 'border-red-500 animate-pulse'
+                      }`}>
+                      <span
+                        className={`${
+                          isOkay ? 'text-green-500' : 'text-red-500'
+                        }`}>
+                        {isOkay ? '적합' : '부적합'}
+                      </span>
+                    </div>
+                  </article>
+
                   <SlideInput
                     label='타임라인'
                     min={0}
-                    max={data.length - 1}
+                    max={data.results.length - 1}
                     step={1}
                     value={timeline}
                     setValue={setTimeline}
                   />
                 </section>
-                <section className='h-2/3'>
+                <section className='h-full'>
                   <Model
                     scale={0.7}
                     isOnMove={false}
@@ -72,13 +128,6 @@ export const Modal = ({
                     peekAngle={(action.No3Motor2 / 18000000) * 65 + 20}
                     peekHeight={(action.No3Motor1 / 1150000) * 15}
                   />
-                </section>
-                <section className='flex justify-center'>
-                  <button
-                    onClick={closeModal}
-                    className='mt-4 px-4 py-2 bg-sky-500 text-white rounded hover:bg-sky-600'>
-                    닫기
-                  </button>
                 </section>
               </>
             )}

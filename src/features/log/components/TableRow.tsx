@@ -37,7 +37,7 @@ export const TableRow = ({ values }: { values: LogColumns }) => {
       <li
         onClick={openModal}
         className={`flex justify-between border ${
-          !!TrackId && 'hover:border-sky-600'
+          !!TrackId && 'hover:bg-sky-200/60'
         }`}>
         <Cell isError={false} value={Datetime} />
         <Cell isError={!TrackId} value={TrackId} />

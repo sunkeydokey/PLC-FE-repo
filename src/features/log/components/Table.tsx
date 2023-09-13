@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { TableHead } from '@/features/log/components/TableHead';
 import { TableRow } from '@/features/log/components/TableRow';
-import { ExcelDownload } from '@/features/log/components/ExcelDownload';
+import { ExcelDownloadButton } from '@/ui/buttons/ExcelDownloadButton';
 
 import { Wrapper } from '@ui/wrapper';
 
@@ -24,16 +24,16 @@ export const Table = () => {
     return (
       <Wrapper>
         {isLoading && (
-          <h2 className='text-stone-200 font-bold text-2xl text-center mb-4'>
+          <h2 className='text-stone-200 font-bold text-2xl text-center'>
             데이터를 요청중입니다.
           </h2>
         )}
         {isError && (
-          <h2 className='text-stone-200 font-bold text-2xl text-center mb-4'>
+          <h2 className='text-stone-200 font-bold text-2xl text-center'>
             잠시후에 다시 시도해주세요.
           </h2>
         )}
-        <section className='bg-slate-100 h-full'>
+        <section className='bg-stone-100 h-full mt-8'>
           <TableHead
             values={{
               Datetime: '시간',
@@ -52,9 +52,9 @@ export const Table = () => {
 
   return (
     <Wrapper>
-      <section className='h-full'>
-        <ExcelDownload
-          data={data?.pages.map((page) =>
+      <section className='fixed right-0 flex justify-end items-center mr-4'>
+        <ExcelDownloadButton
+          data={data.pages.map((page) =>
             page.results.map((log: LogColumns) => ({
               시간: log.Datetime,
               '트랙 정보': log.TrackId,
@@ -68,7 +68,7 @@ export const Table = () => {
           )}
         />
       </section>
-      <section className='bg-slate-100 h-full'>
+      <section className='bg-stone-100 h-full mt-12'>
         <ul>
           <TableHead
             values={{
@@ -92,7 +92,7 @@ export const Table = () => {
           onClick={() => fetchNextPage()}
           className={`${
             hasNextPage || 'hidden'
-          } w-full text-lg font-bold border-lg border-stone-600`}>
+          } w-full text-lg font-bold py-4 border-lg border-stone-600`}>
           ...
         </button>
       </section>

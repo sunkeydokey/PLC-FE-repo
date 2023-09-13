@@ -16,5 +16,8 @@ export type SlideProps = {
   setValue: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export type Children = { children: ReactNode };
+export interface Children {
+  children: ReactNode;
+}
+
 export type ButtonType = 'button' | 'submit' | 'reset' | undefined;
