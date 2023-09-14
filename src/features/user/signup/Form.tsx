@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { FormInput } from '@ui/inputs/FormInput';
@@ -26,9 +26,10 @@ export const SignupForm = () => {
   const onSubmitHandler: SubmitHandler<AuthFormValue> = async (values) => {
     try {
       const { data } = await RequestSignup(values);
-      console.log(data);
-      setSignupMessage('회원가입에 성공했습니다.');
-      navigate('/');
+      if (data) {
+        setSignupMessage('회원가입에 성공했습니다.');
+        navigate('/login');
+      }
     } catch (error) {
       setSignupMessage('회원가입에 실패했습니다.');
     }
@@ -98,7 +99,14 @@ export const SignupForm = () => {
             },
           }}
         />
-        <Button isPrimary={true} text='회원가입' type='submit' />
+        <div className='flex justify-center gap-4 items-center'>
+          <Button isPrimary={true} text='회원가입' type='submit' />
+          <Button
+            isPrimary={false}
+            text={<NavLink to='/login'>로그인</NavLink>}
+            type='button'
+          />
+        </div>
         {signupMessage}
       </form>
     </section>

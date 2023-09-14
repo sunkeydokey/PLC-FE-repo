@@ -1,55 +1,55 @@
-import { ChartCard } from '@/features/dashboard/components/cards/ChartCard';
-import { Wrapper } from '@ui/wrapper';
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
+import { ChartCard } from '@/features/dashboard/components/cards/ChartCard';
 import { Misconduct } from '@/features/dashboard/components/charts/Misconduct';
 import { Malfunction } from '@/features/dashboard/components/charts/Malfunction';
 import { SupplyRun } from '@/features/dashboard/components/charts/SupplyRun';
 import { Dice } from '@/features/dashboard/components/charts/Dice';
 import { Gas } from '@/features/dashboard/components/charts/Gas';
+import { Operation } from '@/features/dashboard/components/charts/Operation';
+
 import { Datepicker } from '@/features/dashboard/components/Datepicker';
 
+import {
+  parsedGlobalEndDate,
+  parsedGlobalStartDate,
+} from '@/features/dashboard/store';
+
 export const Main = () => {
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+
+  const start = useRecoilValue(parsedGlobalStartDate);
+  const end = useRecoilValue(parsedGlobalEndDate);
+
   return (
-    <Wrapper>
-      <section className='w-full mx-auto'>
-        <Datepicker />
-      </section>
-      <section className='mx-4 grid grid-cols-3 gap-4'>
+    <div
+      className='flex flex-col justify-start items-center'
+      onClick={() => setIsCalendarVisible(false)}>
+      <Datepicker
+        isCalendarVisible={isCalendarVisible}
+        setIsCalendarVisible={setIsCalendarVisible}
+      />
+      <section className='grow w-[95%] grid grid-cols-3 gap-4 mb-4'>
         <ChartCard>
-          <Misconduct
-            title='일별 공정 불량률'
-            start={'2023-09-13'}
-            end={'2023-09-13'}
-          />
+          <Misconduct title='일별 공정 불량률' start={start} end={end} />
         </ChartCard>
         <ChartCard>
-          <Malfunction
-            title='일별 3호기 신호 불량률'
-            start={'2023-09-13'}
-            end={'2023-09-13'}
-          />
+          <Malfunction title='일별 3호기 신호 불량률' start={start} end={end} />
         </ChartCard>
         <ChartCard>
-          <Dice
-            title='공정별 생산 용량'
-            start={'2023-09-13'}
-            end={'2023-09-13'}
-          />
+          <Dice title='공정별 생산 용량' start={start} end={end} />
         </ChartCard>
         <ChartCard>
-          <SupplyRun
-            title='일별 가동률'
-            start={'2023-09-13'}
-            end={'2023-09-13'}
-          />
+          <SupplyRun title='일별 가동률' start={start} end={end} />
         </ChartCard>
         <ChartCard>
-          <Gas title='test' start={'2023-09-13'} end={'2023-09-13'} />
+          <Gas title='오염도' start={start} end={end} />
         </ChartCard>
         <ChartCard>
-          <Misconduct title='test' start={'2023-09-13'} end={'2023-09-13'} />
+          <Operation title='기기별 가동' start={start} end={end} />
         </ChartCard>
       </section>
-    </Wrapper>
+    </div>
   );
 };

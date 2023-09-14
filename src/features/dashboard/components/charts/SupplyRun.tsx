@@ -1,30 +1,35 @@
 import { useQuery } from '@tanstack/react-query';
+import ReactApexChart from 'react-apexcharts';
+
+import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
 
 import { requestSupplyRunRatio } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
-import ReactApexChart from 'react-apexcharts';
 
 export const SupplyRun = ({ title, start, end }: Graph) => {
   const { data, isLoading, isError } = useQuery(
     ['SupplyRun', `${start}-${end}`],
     () => requestSupplyRunRatio(start, end),
   );
-  if (isLoading) return <div>Loading</div>;
-  if (isError) return <div>Error</div>;
+
+  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
+  if (isError) return <span>Error</span>;
+
   return (
     <>
-      <h3>{title}</h3>
+      <h3 className='text-center mt-1 text-stone-200 font-semibold'>{title}</h3>
       <div>
         <ReactApexChart
           type='line'
+          height={'260px'}
           options={{
             stroke: {
-              width: [0, 0, 6],
+              width: [0, 0, 2],
             },
             legend: {
               labels: {
-                useSeriesColors: true,
+                colors: '#e7e5e4',
               },
             },
             yaxis: {
@@ -47,23 +52,23 @@ export const SupplyRun = ({ title, start, end }: Graph) => {
             },
             plotOptions: {
               bar: {
-                columnWidth: '10%',
+                columnWidth: '30%',
               },
             },
           }}
           series={[
             {
-              name: '정상',
+              name: '가동',
               type: 'column',
               data: data.map((data: Data) => data.normal),
             },
             {
-              name: '불량',
+              name: '미가동',
               type: 'column',
               data: data.map((data: Data) => data.defect),
             },
             {
-              name: '총량',
+              name: 'Total',
               type: 'line',
               data: data.map(
                 (data: Data) =>

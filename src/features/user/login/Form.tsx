@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -51,39 +51,48 @@ export const LoginForm = () => {
     }
   };
   return (
-    <form
-      noValidate
-      className='flex flex-col justify-center gap-3 w-full'
-      onSubmit={handleSubmit(onSubmitHandler)}>
-      <FormInput
-        label='이메일'
-        type='email'
-        formState={formState}
-        register={register}
-        registerOptions={{
-          required: {
-            value: true,
-            message: '이메일을 입력해주세요.',
-          },
-          pattern: {
-            value: Regex.email,
-            message: '올바른 이메일 형식을 입력해주세요.',
-          },
-        }}
-      />
-      <FormInput
-        label='비밀번호'
-        type='password'
-        formState={formState}
-        register={register}
-        registerOptions={{
-          required: {
-            value: true,
-            message: '비밀번호를 입력해주세요.',
-          },
-        }}
-      />
-      <Button isPrimary={true} type='submit' text='로그인' />
-    </form>
+    <section className='w-full h-full'>
+      <form
+        noValidate
+        className='flex flex-col justify-center gap-3 h-full w-full'
+        onSubmit={handleSubmit(onSubmitHandler)}>
+        <FormInput
+          label='이메일'
+          type='email'
+          formState={formState}
+          register={register}
+          registerOptions={{
+            required: {
+              value: true,
+              message: '이메일을 입력해주세요.',
+            },
+            pattern: {
+              value: Regex.email,
+              message: '올바른 이메일 형식을 입력해주세요.',
+            },
+          }}
+        />
+        <FormInput
+          label='비밀번호'
+          type='password'
+          formState={formState}
+          register={register}
+          registerOptions={{
+            required: {
+              value: true,
+              message: '비밀번호를 입력해주세요.',
+            },
+          }}
+        />
+        <div className='flex justify-center gap-4 items-center'>
+          <Button isPrimary={true} text='로그인' type='submit' />
+          <Button
+            isPrimary={false}
+            text={<NavLink to='/login'>회원가입</NavLink>}
+            type='button'
+          />
+        </div>{' '}
+      </form>
+    </section>
   );
 };

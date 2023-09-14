@@ -5,6 +5,9 @@ export type Data = {
   radiation?: number;
   dice?: number;
   TrackId?: number;
+  first?: number;
+  second?: number;
+  third?: number;
 };
 
 export type Graph = {

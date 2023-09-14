@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
+
 import { requestDiceLog } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
@@ -10,14 +12,16 @@ export const Dice = ({ title, start, end }: Graph) => {
     ['DiceLog', `${start}-${end}`],
     () => requestDiceLog(start, end),
   );
-  if (isError) return <div>Error</div>;
-  if (isLoading) return <div>Loading</div>;
+
+  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
+  if (isError) return <span>Error</span>;
+
   return (
     <>
-      <h3>{title}</h3>
+      <h3 className='text-center mt-1 text-stone-200 font-semibold'>{title}</h3>
       <ReactApexChart
         type='line'
-        height={'auto'}
+        height={'260px'}
         options={{
           legend: {
             labels: {

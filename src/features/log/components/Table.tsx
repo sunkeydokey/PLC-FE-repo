@@ -4,8 +4,6 @@ import { TableHead } from '@/features/log/components/TableHead';
 import { TableRow } from '@/features/log/components/TableRow';
 import { ExcelDownloadButton } from '@/ui/buttons/ExcelDownloadButton';
 
-import { Wrapper } from '@ui/wrapper';
-
 import { requestMachineLog } from '@/features/log/api/index';
 
 import { LogColumns } from '@/features/log/types';
@@ -22,7 +20,7 @@ export const Table = () => {
 
   if (isLoading || isError)
     return (
-      <Wrapper>
+      <>
         {isLoading && (
           <h2 className='text-stone-200 font-bold text-2xl text-center'>
             데이터를 요청중입니다.
@@ -47,12 +45,12 @@ export const Table = () => {
             }}
           />
         </section>
-      </Wrapper>
+      </>
     );
 
   return (
-    <Wrapper>
-      <section className='fixed right-0 flex justify-end items-center mr-4'>
+    <>
+      <section className='fixed right-0 flex justify-end items-center mt-12 mr-4'>
         <ExcelDownloadButton
           data={data.pages.map((page) =>
             page.results.map((log: LogColumns) => ({
@@ -96,6 +94,6 @@ export const Table = () => {
           ...
         </button>
       </section>
-    </Wrapper>
+    </>
   );
 };

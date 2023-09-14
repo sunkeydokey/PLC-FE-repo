@@ -1,23 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
+import ReactApexChart from 'react-apexcharts';
+
+import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
 
 import { requestGasLog } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
-import ReactApexChart from 'react-apexcharts';
 
 export const Gas = ({ title, start, end }: Graph) => {
   const { data, isLoading, isError } = useQuery(
     ['GasLog', `${start}-${end}`],
     () => requestGasLog(start, end),
   );
-  if (isError) return <div>Error</div>;
-  if (isLoading) return <div>Loading</div>;
+
+  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
+  if (isError) return <span>Error</span>;
+
   return (
     <>
-      <h3>{title}</h3>
+      <h3 className='text-center mt-1 text-stone-200 font-semibold'>{title}</h3>
       <ReactApexChart
         type='line'
-        height={'auto'}
+        height={'260px'}
         options={{
           legend: {
             labels: {

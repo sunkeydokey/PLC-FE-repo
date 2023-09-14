@@ -31,7 +31,13 @@ export const Modal = ({
   useEffect(() => {
     if (!data) return;
     setAction(data.results[timeline]);
-    setIsOkay(data.dice > 1 && data.dice < 6 && data.radiation <= 70);
+    setIsOkay(
+      data.dice &&
+        data.radiation &&
+        data.dice != '규격미달' &&
+        data.dice != '규격초과' &&
+        data.radiation <= 70,
+    );
   }, [data, timeline]);
 
   const closeModal = () => setIsVisible(false);
@@ -74,7 +80,9 @@ export const Modal = ({
                         용량:{' '}
                         <span
                           className={`${
-                            data.dice && data.dice > 1 && data.dice < 6
+                            data.dice &&
+                            data.dice != '규격미달' &&
+                            data.dice != '규격초과'
                               ? 'text-green-500'
                               : 'text-red-500 animate-pulse'
                           } font-bold`}>
@@ -84,7 +92,7 @@ export const Modal = ({
                     </div>
                     <div>
                       <p className='text-stone-200'>
-                        오염도:{' '}
+                        오염도 :{' '}
                         <span
                           className={`${
                             data.radiation && data.radiation <= 70

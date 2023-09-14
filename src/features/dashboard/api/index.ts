@@ -40,3 +40,11 @@ export const requestGasLog = async (start: string, end: string) => {
   });
   return data.results;
 };
+
+export const requestOperationRecord = async (start: string, end: string) => {
+  const { data } = await axios({
+    method: 'GET',
+    url: `/operation?start=${start}&end=${end}`,
+  });
+  return data.results;
+};
