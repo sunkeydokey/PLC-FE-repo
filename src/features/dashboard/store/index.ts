@@ -11,6 +11,11 @@ export const globalEndDate = atom({
   default: startOfToday(),
 });
 
+export const showAllAtom = atom({
+  key: 'showAllAtom',
+  default: true,
+});
+
 export const parsedGlobalStartDate = selector<string>({
   key: 'parsedGlobalStartDate',
   get: ({ get }) => {

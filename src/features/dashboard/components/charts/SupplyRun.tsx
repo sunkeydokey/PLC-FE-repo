@@ -1,20 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import ReactApexChart from 'react-apexcharts';
 
-import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
+import { FetchHandler } from '@ui/fetchingHandlers/FetchHandler';
 
 import { requestSupplyRunRatio } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
 
-export const SupplyRun = ({ title, start, end }: Graph) => {
+export const SupplyRun = ({ title, start, end, height }: Graph) => {
   const { data, isLoading, isError } = useQuery(
     ['SupplyRun', `${start}-${end}`],
     () => requestSupplyRunRatio(start, end),
   );
 
-  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
-  if (isError) return <span>Error</span>;
+  if (isLoading || isError)
+    return (
+      <FetchHandler title={title} isLoading={isLoading} isError={isError} />
+    );
 
   return (
     <>
@@ -22,11 +24,12 @@ export const SupplyRun = ({ title, start, end }: Graph) => {
       <div>
         <ReactApexChart
           type='line'
-          height={'260px'}
+          height={height}
           options={{
             stroke: {
-              width: [0, 0, 2],
+              width: 2,
             },
+            colors: ['#4ade80', '#fb923c', '#22d3ee'],
             legend: {
               labels: {
                 colors: '#e7e5e4',
@@ -46,9 +49,6 @@ export const SupplyRun = ({ title, start, end }: Graph) => {
                   colors: '#e7e5e4',
                 },
               },
-            },
-            theme: {
-              palette: 'palette6',
             },
             plotOptions: {
               bar: {

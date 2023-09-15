@@ -1,20 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 import ReactApexChart from 'react-apexcharts';
 
-import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
+import { FetchHandler } from '@ui/fetchingHandlers/FetchHandler';
 
 import { requestMisconductRatio } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
 
-export const Misconduct = ({ title, start, end }: Graph) => {
+export const Misconduct = ({ title, start, end, height }: Graph) => {
   const { data, isLoading, isError } = useQuery(
     ['Misconduct', `${start}-${end}`],
     () => requestMisconductRatio(start, end),
   );
 
-  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
-  if (isError) return <span>Error</span>;
+  if (isLoading || isError)
+    return (
+      <FetchHandler title={title} isLoading={isLoading} isError={isError} />
+    );
 
   return (
     <>
@@ -22,10 +24,11 @@ export const Misconduct = ({ title, start, end }: Graph) => {
       <div>
         <ReactApexChart
           type='line'
-          height={'260px'}
+          height={height}
           options={{
+            colors: ['#60a5fa', '#ef4444', '#facc15'],
             stroke: {
-              width: [0, 0, 2],
+              width: 4,
             },
             legend: {
               labels: {

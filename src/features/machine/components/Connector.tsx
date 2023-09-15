@@ -20,6 +20,11 @@ export const Connector = ({
   setPeekAngle: React.Dispatch<React.SetStateAction<number>>;
   setPeekHeight: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  const mqttURL = import.meta.env.PROD
+    ? import.meta.env.VITE_MQTT_URL
+    : 'mqtt://192.168.0.128';
+  const mqttPort = import.meta.env.PROD ? import.meta.env.VITE_MQTT_PORT : 8888;
+
   const [isConnected, setIsConnected] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [client, setClient] = useState<MqttClient>();
@@ -70,8 +75,8 @@ export const Connector = ({
   };
 
   useEffect(() => {
-    const client = connect('mqtt://192.168.0.128', {
-      port: 8888,
+    const client = connect(mqttURL, {
+      port: mqttPort,
       protocol: 'ws',
     });
 
@@ -79,12 +84,9 @@ export const Connector = ({
       setIsConnected(true);
     });
 
-    client.on('error', (err) => {
-      console.error('Connection error: ', err);
+    client.on('error', () => {
+      setIsConnected(false);
       client.end();
-    });
-    client.on('reconnect', () => {
-      console.log('Reconnecting');
     });
 
     client.on('message', (_topic, message) => {

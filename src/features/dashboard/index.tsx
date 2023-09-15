@@ -1,55 +1,45 @@
 import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-
-import { ChartCard } from '@/features/dashboard/components/cards/ChartCard';
-import { Misconduct } from '@/features/dashboard/components/charts/Misconduct';
-import { Malfunction } from '@/features/dashboard/components/charts/Malfunction';
-import { SupplyRun } from '@/features/dashboard/components/charts/SupplyRun';
-import { Dice } from '@/features/dashboard/components/charts/Dice';
-import { Gas } from '@/features/dashboard/components/charts/Gas';
-import { Operation } from '@/features/dashboard/components/charts/Operation';
+import { useRecoilState } from 'recoil';
+import {
+  Squares2X2Icon,
+  ArrowsPointingOutIcon,
+} from '@heroicons/react/24/outline';
 
 import { Datepicker } from '@/features/dashboard/components/Datepicker';
+import { GridBoard } from '@/features/dashboard/components/GridBoard';
+import { ListBoard } from '@/features/dashboard/components/ListBoard';
 
-import {
-  parsedGlobalEndDate,
-  parsedGlobalStartDate,
-} from '@/features/dashboard/store';
+import { showAllAtom } from '@/features/dashboard/store';
 
 export const Main = () => {
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
-
-  const start = useRecoilValue(parsedGlobalStartDate);
-  const end = useRecoilValue(parsedGlobalEndDate);
+  const [showAll, setShowAll] = useRecoilState(showAllAtom);
 
   return (
     <div
-      className='flex flex-col justify-start items-center'
+      className='flex flex-col justify-start items-center relative'
       onClick={() => setIsCalendarVisible(false)}>
       <Datepicker
         isCalendarVisible={isCalendarVisible}
         setIsCalendarVisible={setIsCalendarVisible}
       />
-      <section className='grow w-[95%] grid grid-cols-3 gap-4 mb-4'>
-        <ChartCard>
-          <Misconduct title='일별 공정 불량률' start={start} end={end} />
-        </ChartCard>
-        <ChartCard>
-          <Malfunction title='일별 3호기 신호 불량률' start={start} end={end} />
-        </ChartCard>
-        <ChartCard>
-          <Dice title='공정별 생산 용량' start={start} end={end} />
-        </ChartCard>
-        <ChartCard>
-          <SupplyRun title='일별 가동률' start={start} end={end} />
-        </ChartCard>
-        <ChartCard>
-          <Gas title='오염도' start={start} end={end} />
-        </ChartCard>
-        <ChartCard>
-          <Operation title='기기별 가동' start={start} end={end} />
-        </ChartCard>
+      <section className='absolute self-end mr-10 mb-2 top-[-8px] overflow-hidden border border-stone-200 rounded-md flex justify-around items-center'>
+        <button
+          onClick={() => setShowAll(true)}
+          className={`border-r border-stone-200 px-2 py-2 ${
+            showAll ? 'bg-sky-600' : 'bg-stone-800'
+          }`}>
+          <Squares2X2Icon className={`w-6 h-6 stroke-stone-200`} />
+        </button>
+        <button
+          onClick={() => setShowAll(false)}
+          className={`border-l border-stone-200 px-2 py-2 ${
+            !showAll ? 'bg-sky-600' : 'bg-stone-800'
+          }`}>
+          <ArrowsPointingOutIcon className={`w-6 h-6 stroke-stone-200`} />
+        </button>
       </section>
+      {showAll ? <GridBoard /> : <ListBoard />}
     </div>
   );
 };

@@ -1,13 +1,14 @@
-import { LoginForm } from '@/features/user/login/Form';
+import { LoginForm } from '@/features/user/components/forms/LoginForm';
+import { FormWrapper } from '@/features/user/components/FormWrapper';
+
+import { BackGround } from '@ui/background-images/BackGround';
 
 export const Main = () => {
   return (
-    <section className='flex h-4/5 w-3/5 bg-stone-200 rounded-lg mx-auto my-auto overflow-hidden'>
-      <div className='w-full'>
-        <h2 className='font-semibold pl-4 pt-4 text-stone-700'>LogIn</h2>
-        <LoginForm />
-      </div>
-      <div className='bg-[url("/factory.jpg")] bg-no-repeat bg-cover w-full h-full' />
-    </section>
+    <FormWrapper
+      title={'로그인'}
+      form={<LoginForm />}
+      bg={<BackGround file='desk.jpg'>{null}</BackGround>}
+    />
   );
 };

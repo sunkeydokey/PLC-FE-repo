@@ -1,13 +1,14 @@
-import { SignupForm } from '@/features/user/signup/Form';
+import { FormWrapper } from '@/features/user/components/FormWrapper';
+import { SignupForm } from '@/features/user/components/forms/SignupForm';
+
+import { BackGround } from '@ui/background-images/BackGround';
 
 export const Main = () => {
   return (
-    <section className='flex h-4/5 w-3/5 bg-stone-200 rounded-lg mx-auto my-auto overflow-hidden'>
-      <div className='w-full'>
-        <h2 className='font-semibold pl-4 pt-4 text-stone-700'>SignUp</h2>
-        <SignupForm />
-      </div>
-      <div className='bg-[url("/factory.jpg")] bg-no-repeat bg-cover w-full h-full' />
-    </section>
+    <FormWrapper
+      title={'회원가입'}
+      form={<SignupForm />}
+      bg={<BackGround file='factory.jpg'>{null}</BackGround>}
+    />
   );
 };

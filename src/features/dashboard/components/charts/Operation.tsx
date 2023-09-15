@@ -1,36 +1,34 @@
 import { useQuery } from '@tanstack/react-query';
 import ReactApexChart from 'react-apexcharts';
 
-import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
+import { FetchHandler } from '@ui/fetchingHandlers/FetchHandler';
 
 import { requestOperationRecord } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
 
-export const Operation = ({ title, start, end }: Graph) => {
+export const Operation = ({ title, start, end, height }: Graph) => {
   const { data, isLoading, isError } = useQuery(
     ['Operation', `${start}-${end}`],
     () => requestOperationRecord(start, end),
   );
-  console.log(data);
 
-  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
-  if (isError) return <span>Error</span>;
-
+  if (isLoading || isError)
+    return (
+      <FetchHandler title={title} isLoading={isLoading} isError={isError} />
+    );
   return (
     <>
       <h3 className='text-center mt-1 text-stone-200 font-semibold'>{title}</h3>
       <div>
         <ReactApexChart
           type='line'
-          height={'260px'}
+          height={height}
           options={{
+            colors: ['#4ade80', '#7dd3fc', '#fcd34d'],
             stroke: {
-              width: 4,
-              // colors: [],
-            },
-            markers: {
-              // colors: [],
+              width: 2,
+              curve: 'smooth',
             },
             legend: {
               labels: {

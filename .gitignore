@@ -15,10 +15,6 @@ dist-ssr
 # env
 *.env
 
-# GLTF Files
-public/gltf/*
-
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

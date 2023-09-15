@@ -1,27 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
 import ReactApexChart from 'react-apexcharts';
 
-import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
+import { FetchHandler } from '@ui/fetchingHandlers/FetchHandler';
 
 import { requestGasLog } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
 
-export const Gas = ({ title, start, end }: Graph) => {
+export const Gas = ({ title, start, end, height }: Graph) => {
   const { data, isLoading, isError } = useQuery(
     ['GasLog', `${start}-${end}`],
     () => requestGasLog(start, end),
   );
 
-  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
-  if (isError) return <span>Error</span>;
+  if (isLoading || isError)
+    return (
+      <FetchHandler title={title} isLoading={isLoading} isError={isError} />
+    );
 
   return (
     <>
       <h3 className='text-center mt-1 text-stone-200 font-semibold'>{title}</h3>
       <ReactApexChart
         type='line'
-        height={'260px'}
+        height={height}
         options={{
           legend: {
             labels: {
@@ -39,8 +41,16 @@ export const Gas = ({ title, start, end }: Graph) => {
             },
           },
           xaxis: {
-            categories: data.map((data: Data) => data.Datetime),
+            categories: data.map(
+              (data: Data) =>
+                data.Datetime.split(' ')[0].split('/')[1] +
+                '월' +
+                data.Datetime.split(' ')[0].split('/')[2] +
+                '일',
+            ),
+
             labels: {
+              show: false,
               style: {
                 colors: '#e7e5e4',
               },

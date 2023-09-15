@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { Container } from '@ui/container';
 import { LayoutNavMenu } from '@ui/menuItems/LayoutNavMenu';
@@ -13,11 +13,8 @@ export const Layout = ({ needLogin }: { needLogin: boolean }) => {
 
   return (
     <div className='flex relative bg-zinc-700 min-h-screen select-none'>
-      <aside className='static justify-start flex flex-col min-w-[74px]'>
-        <div className='fixed z-50 w-[74px]'>
-          <header className='font-extrabold font-mono text-4xl my-2 text-center text-yellow-500'>
-            <Link to='/'>3⁺</Link>
-          </header>
+      <aside className='static justify-start flex flex-col min-w-[64px]'>
+        <div className='fixed z-50 w-[64px] mt-12'>
           <nav className='w-full flex flex-col'>
             {links
               .filter((link) => link.needLogin === userState.isLoggedIn)

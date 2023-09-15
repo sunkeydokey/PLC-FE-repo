@@ -1,3 +1,9 @@
+import { BackGround } from '@ui/background-images/BackGround';
+
 export const Home = () => {
-  return <div>123</div>;
+  return (
+    <BackGround file='home-bg.jpg'>
+      <div className='w-full h-full'></div>
+    </BackGround>
+  );
 };

@@ -36,7 +36,7 @@ export const TableRow = ({ values }: { values: LogColumns }) => {
       )}
       <li
         onClick={openModal}
-        className={`flex justify-between border ${
+        className={`grid grid-cols-8 border ${
           !!TrackId && 'hover:bg-sky-200/60'
         }`}>
         <Cell isError={false} value={Datetime} />

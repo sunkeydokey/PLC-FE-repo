@@ -14,4 +14,5 @@ export type Graph = {
   title: string;
   start: string;
   end: string;
+  height: string;
 };

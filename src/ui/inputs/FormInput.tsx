@@ -10,10 +10,12 @@ export const FormInput = ({
   return (
     <>
       <div className='flex justify-center items-center w-4/5 mx-auto my-1'>
-        <label className='basis-1/3 px-3 text-end'>{label}&nbsp;&nbsp;</label>
+        <label className='basis-1/5 text-center text-stone-800'>
+          {label}&nbsp;&nbsp;
+        </label>
         <input
           autoComplete='off'
-          className='focus:outline-none basis-2/5 grow px-4 bg-inherit border-lg border-b border-stone-800'
+          className='focus:outline-none text-stone-600 basis-3/5 grow px-4 bg-inherit border-lg border-b border-stone-800'
           {...register(label, { ...registerOptions })}
           type={type}
         />

@@ -1,28 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
 import ReactApexChart from 'react-apexcharts';
 
-import { LoadingHandler } from '@/features/dashboard/components/charts/LoadingHandler';
+import { FetchHandler } from '@ui/fetchingHandlers/FetchHandler';
 
 import { requestMalfunctiontRatio } from '@/features/dashboard/api';
 
 import type { Data, Graph } from '@/features/dashboard/types';
 
-export const Malfunction = ({ title, start, end }: Graph) => {
+export const Malfunction = ({ title, start, end, height }: Graph) => {
   const { data, isLoading, isError } = useQuery(
     ['Malfunction', `${start}-${end}`],
     () => requestMalfunctiontRatio(start, end),
   );
 
-  if (isLoading) return <LoadingHandler title={title} isLoading={isLoading} />;
-  if (isError) return <span>Error</span>;
-
+  if (isLoading || isError)
+    return (
+      <FetchHandler title={title} isLoading={isLoading} isError={isError} />
+    );
   return (
     <>
       <h3 className='text-center mt-1 text-stone-200 font-semibold'>{title}</h3>
       <div>
         <ReactApexChart
           type='bar'
-          height={'260px'}
+          height={height}
           options={{
             legend: {
               labels: {
