@@ -17,7 +17,7 @@ export const Button = ({
         isPrimary
           ? 'bg-sky-400 text-stone-200 hover:bg-stone-200 hover:text-sky-400 hover:border-sky-400'
           : 'bg-stone-200 text-sky-400 hover:bg-sky-500 hover:text-stone-200 hover:border-sky-600'
-      } w-20 font-bold border-sky-400 rounded-md px-2 border-2 py-1`}>
+      } w-20 font-bold border-sky-400 rounded-md px-1 border-2 py-1`}>
       {text}
     </button>
   );

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { utils, writeFileXLSX } from 'xlsx';
 
 type Data = {
@@ -6,18 +6,12 @@ type Data = {
 };
 
 export const ExcelDownloadButton = ({ data }: { data: Data[][] }) => {
-  const [excelData, setExcelData] = useState<Data[]>(data.flat());
-
-  useEffect(() => {
-    setExcelData(data.flat());
-  }, [data]);
-
   const exportFile = useCallback(() => {
-    const ws = utils.json_to_sheet(excelData);
+    const ws = utils.json_to_sheet(data.flat());
     const wb = utils.book_new();
     utils.book_append_sheet(wb, ws, 'Data');
     writeFileXLSX(wb, 'logs.xlsx');
-  }, [excelData]);
+  }, [data]);
 
   return (
     <button

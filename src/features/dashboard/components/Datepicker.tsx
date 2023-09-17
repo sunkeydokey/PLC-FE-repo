@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import { useRecoilState, useRecoilValue } from 'recoil';
+
 import {
   add,
   eachDayOfInterval,
@@ -13,11 +15,11 @@ import {
   startOfToday,
   startOfWeek,
 } from 'date-fns';
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  CalendarDaysIcon,
-} from '@heroicons/react/24/solid';
+
+import { CalendarDaysIcon } from '@heroicons/react/24/solid';
+
+import { MonthDirection } from '@ui/calendar-items/MonthDirection';
+import { Head } from '@ui/calendar-items/Head';
 
 import {
   globalEndDate,
@@ -72,7 +74,7 @@ export const Datepicker = ({
   return (
     <section
       onClick={(e) => e.stopPropagation()}
-      className='w-1/3 mx-auto relative top-[-16px]'>
+      className='w-1/3 mx-auto relative'>
       {/* display period of datas */}
       <div
         className={`${
@@ -87,6 +89,7 @@ export const Datepicker = ({
             {isCalendarVisible ? format(endDate, 'yyyy-MM-dd') : parsedEnd}
           </span>
         </p>
+
         {/* button opens the calendar */}
         <button
           onClick={() => setIsCalendarVisible(!isCalendarVisible)}
@@ -95,67 +98,46 @@ export const Datepicker = ({
           <CalendarDaysIcon className='w-10 h-full' />
         </button>
       </div>
+
       {/* Calendar */}
       {isCalendarVisible && (
         <div className='absolute w-full z-50'>
           <div className='bg-stone-400 w-full h-full mx-auto rounded-b-xl py-4'>
             {/* buttons to decide select start date or end date */}
             <div className='flex items-center justify-center gap-8 mb-2'>
+              {/* select start date*/}
               <button
                 onClick={() => setIsPickingStart(true)}
                 className={`${
                   isPickingStart
                     ? 'text-stone-200 bg-cyan-800 border-cyan-800'
                     : 'text-stone-800 border-stone-800'
-                } border rounded-md px-2`}>
+                } border rounded-md px-2  font-semibold`}>
                 시작일 선택
               </button>
+
+              {/* select end date */}
               <button
                 onClick={() => setIsPickingStart(false)}
                 className={`${
                   !isPickingStart
                     ? 'text-stone-200 bg-cyan-800 border-cyan-800'
                     : 'text-stone-800 border-stone-800'
-                } border rounded-md px-2`}>
+                } border rounded-md px-2 font-semibold`}>
                 종료일 선택
               </button>
             </div>
+
             {/* <(prev)  YYYY-MM  (next)> */}
-            <div className='flex items-center justify-around mb-4'>
-              <button
-                type='button'
-                onClick={previousMonth}
-                className='-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500'>
-                <span className='sr-only'>Previous month</span>
-                <ChevronLeftIcon
-                  className='w-5 h-5 fill-stone-200'
-                  aria-hidden='true'
-                />
-              </button>
-              <h2 className='font-semibold text-gray-900'>
-                {format(firstDayCurrentMonth, 'yyyy년 MM월')}
-              </h2>
-              <button
-                onClick={nextMonth}
-                type='button'
-                className='-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500'>
-                <span className='sr-only'>Next month</span>
-                <ChevronRightIcon
-                  className='w-5 h-5 fill-stone-200'
-                  aria-hidden='true'
-                />
-              </button>
-            </div>
+            <MonthDirection
+              previousMonth={previousMonth}
+              nextMonth={nextMonth}
+              text={format(firstDayCurrentMonth, 'yyyy년 MM월')}
+            />
+
             {/* days header (weekdays) */}
-            <p className='grid grid-cols-7 text-xs leading-6 text-center'>
-              <span className='text-red-800'>Sun</span>
-              <span className='text-stone-600'>Mon</span>
-              <span className='text-stone-600'>Tue</span>
-              <span className='text-stone-600'>Wed</span>
-              <span className='text-stone-600'>Thu</span>
-              <span className='text-stone-600'>Fri</span>
-              <span className='text-cyan-700'>Sat</span>
-            </p>
+            <Head />
+
             {/* day buttons for calendar */}
             <div className='grid grid-cols-7 text-sm'>
               {days.map((day) => (
@@ -222,6 +204,7 @@ export const Datepicker = ({
                 </div>
               ))}
             </div>
+
             <div className='flex items-center justify-center gap-8 mt-4'>
               {/* if calcel button is clicked reset local states */}
               <button
@@ -233,6 +216,7 @@ export const Datepicker = ({
                 }}>
                 취소
               </button>
+
               {/* if apply button is clicked apply local state to global states */}
               <button
                 className='px-2 py-1 border border-slate-600 bg-slate-600 rounded-md text-stone-200'

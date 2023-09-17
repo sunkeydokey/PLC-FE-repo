@@ -22,11 +22,25 @@ export const Main = () => {
 
   if (isLoading || isError)
     return (
-      <FetchHandler
-        title='로그 데이터 요청 중'
-        isLoading={isLoading}
-        isError={isError}
-      />
+      <>
+        <div className='w-full bg-white my-12'>
+          <TableHead
+            values={{
+              Datetime: '시간',
+              TrackId: '공정 정보',
+              Dicevalue: '감지된 주사위 값',
+              No1Action: '1호기 작동여부',
+              No2InPoint: '2호기 주사위 준비 여부',
+              No3Motor1: '3호기 높이',
+              No3Motor2: '3호기 각도',
+              Start: '동작여부',
+            }}
+          />
+        </div>
+        <div className='flex flex-col items-center w-full'>
+          <FetchHandler isLoading={isLoading} isError={isError} />
+        </div>
+      </>
     );
 
   return (

@@ -17,13 +17,13 @@ export const Main = () => {
 
   return (
     <div
-      className='flex flex-col justify-start items-center relative'
+      className='flex flex-col justify-start items-center'
       onClick={() => setIsCalendarVisible(false)}>
       <Datepicker
         isCalendarVisible={isCalendarVisible}
         setIsCalendarVisible={setIsCalendarVisible}
       />
-      <section className='absolute self-end mr-10 mb-2 top-[-8px] overflow-hidden border border-stone-200 rounded-md flex justify-around items-center'>
+      <section className='self-end mr-10 mb-2 top-[-8px] overflow-hidden border border-stone-200 rounded-md flex justify-around items-center'>
         <button
           onClick={() => setShowAll(true)}
           className={`border-r border-stone-200 px-2 py-2 ${

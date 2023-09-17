@@ -10,7 +10,7 @@ export const TopMenu = () => {
   const userState = useRecoilValue(loginState);
 
   return (
-    <div className='flex justify-between py-2 mx-5 items-center'>
+    <div className='flex justify-between py-6 mx-5 items-center'>
       <NavLink to='/' className='font-extrabold text-2xl text-yellow-300/60'>
         Trace
       </NavLink>

@@ -97,49 +97,24 @@ export const ListBoard = () => {
           기기별 가동
         </Tab>
       </Tab.List>
-      <Tab.Panels className='w-7/12'>
+      <Tab.Panels className='w-2/5'>
         <Tab.Panel>
-          <Misconduct
-            title='일별 공정 불량률'
-            start={start}
-            end={end}
-            height='auto'
-          />
+          <Misconduct start={start} end={end} height='auto' />
         </Tab.Panel>
         <Tab.Panel>
-          <Malfunction
-            title='일별 3호기 신호 불량률'
-            start={start}
-            end={end}
-            height='auto'
-          />
+          <Malfunction start={start} end={end} height='auto' />
         </Tab.Panel>
         <Tab.Panel>
-          <Dice
-            title='공정별 생산 용량'
-            start={start}
-            end={end}
-            height='auto'
-          />
+          <Dice start={start} end={end} height='auto' />
         </Tab.Panel>
         <Tab.Panel>
-          <SupplyRun
-            title='일별 가동률'
-            start={start}
-            end={end}
-            height='auto'
-          />
+          <SupplyRun start={start} end={end} height='auto' />
         </Tab.Panel>
         <Tab.Panel>
-          <Gas title='오염도' start={start} end={end} height='auto' />
+          <Gas start={start} end={end} height='auto' />
         </Tab.Panel>
         <Tab.Panel>
-          <Operation
-            title='기기별 가동'
-            start={start}
-            end={end}
-            height='auto'
-          />
+          <Operation start={start} end={end} height='auto' />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>

@@ -18,34 +18,24 @@ export const GridBoard = () => {
   const end = useRecoilValue(parsedGlobalEndDate);
 
   return (
-    <section className='w-[95%] grid grid-cols-3 gap-4 mb-4'>
-      <ChartCard>
-        <Misconduct
-          title='일별 공정 불량률'
-          start={start}
-          end={end}
-          height='260px'
-        />
+    <section className='w-11/12 grid grid-cols-3 gap-12 mt-4'>
+      <ChartCard title='일별 공정 불량률'>
+        <Misconduct start={start} end={end} height='auto' />
       </ChartCard>
-      <ChartCard>
-        <Dice title='공정별 생산 용량' start={start} end={end} height='260px' />
+      <ChartCard title='공정별 생산 용량'>
+        <Dice start={start} end={end} height='auto' />
       </ChartCard>
-      <ChartCard>
-        <Malfunction
-          title='일별 3호기 신호 불량률'
-          start={start}
-          end={end}
-          height='260px'
-        />
+      <ChartCard title='일별 3호기 신호 불량률'>
+        <Malfunction start={start} end={end} height='auto' />
       </ChartCard>
-      <ChartCard>
-        <SupplyRun title='일별 가동률' start={start} end={end} height='260px' />
+      <ChartCard title='일별 가동률'>
+        <SupplyRun start={start} end={end} height='auto' />
       </ChartCard>
-      <ChartCard>
-        <Gas title='오염도' start={start} end={end} height='260px' />
+      <ChartCard title='오염도'>
+        <Gas start={start} end={end} height='auto' />
       </ChartCard>
-      <ChartCard>
-        <Operation title='기기별 가동' start={start} end={end} height='260px' />
+      <ChartCard title='기기별 가동'>
+        <Operation start={start} end={end} height='auto' />
       </ChartCard>
     </section>
   );
