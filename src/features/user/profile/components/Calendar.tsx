@@ -58,7 +58,7 @@ export const Calendar = () => {
                 key={day.toString()}
                 className={`flex flex-col border w-full h-full overflow-hidden`}>
                 <time
-                  className='border-b font-semibold border-stone-300 w-full flex justify-between px-4 items-center'
+                  className='border-b font-semibold border-stone-300 w-full flex justify-between items-center'
                   dateTime={format(day, 'yyyy-MM-dd')}>
                   <p
                     className={`${
@@ -69,7 +69,7 @@ export const Calendar = () => {
                     } px-2 text-start`}>
                     {isEqual(today, day) ? 'Today' : format(day, 'd')}
                   </p>
-                  <button className='border border-cyan-200 rounded'>
+                  <button className='mr-1 border border-cyan-200 rounded'>
                     <PlusIcon
                       className='w-4 h-4 fill-cyan-200'
                       aria-hidden='true'

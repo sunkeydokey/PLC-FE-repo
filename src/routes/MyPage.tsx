@@ -1,5 +1,5 @@
 import { Main } from '@/features/user/profile';
 
-export const Profile = () => {
+export const MyPage = () => {
   return <Main />;
 };

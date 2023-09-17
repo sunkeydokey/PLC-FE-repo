@@ -5,7 +5,7 @@ import { Home } from '@/routes/Home';
 import { DashBoard } from '@/routes/DashBoard';
 import { Control } from '@/routes/Control';
 import { Log } from '@/routes/Log';
-import { Profile } from '@/routes/Profile';
+import { MyPage } from '@/routes/MyPage';
 import { Edit } from '@/routes/Edit';
 
 import { Login } from '@/routes/Login';
@@ -24,8 +24,8 @@ export const App = () => {
         <Route path='/dashboard' element={<DashBoard />} />
         <Route path='/control' element={<Control />} />
         <Route path='/log' element={<Log />} />
-        <Route path='/profile' element={<Profile />}>
-          <Route path='/profile/edit' element={<Edit />}></Route>
+        <Route path='/mypage' element={<MyPage />}>
+          <Route path='/mypage/edit' element={<Edit />}></Route>
         </Route>
         <Route path='/error' element={<ErrorPage />} />
         <Route path='/*' element={<NotFound />} />

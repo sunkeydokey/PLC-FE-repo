@@ -23,19 +23,15 @@ export const Main = () => {
         isCalendarVisible={isCalendarVisible}
         setIsCalendarVisible={setIsCalendarVisible}
       />
-      <section className='self-end mr-10 mb-2 top-[-8px] overflow-hidden border border-stone-200 rounded-md flex justify-around items-center'>
+      <section className='self-end mb-2 mr-10 overflow-hidden border border-stone-200 rounded-md flex divide-x items-center'>
         <button
           onClick={() => setShowAll(true)}
-          className={`border-r border-stone-200 px-2 py-2 ${
-            showAll ? 'bg-sky-600' : 'bg-stone-800'
-          }`}>
+          className={`px-2 py-2 ${showAll ? 'bg-sky-600' : 'bg-stone-800'}`}>
           <Squares2X2Icon className={`w-6 h-6 stroke-stone-200`} />
         </button>
         <button
           onClick={() => setShowAll(false)}
-          className={`border-l border-stone-200 px-2 py-2 ${
-            !showAll ? 'bg-sky-600' : 'bg-stone-800'
-          }`}>
+          className={`px-2 py-2 ${!showAll ? 'bg-sky-600' : 'bg-stone-800'}`}>
           <ArrowsPointingOutIcon className={`w-6 h-6 stroke-stone-200`} />
         </button>
       </section>

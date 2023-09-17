@@ -18,7 +18,7 @@ export const GridBoard = () => {
   const end = useRecoilValue(parsedGlobalEndDate);
 
   return (
-    <section className='w-11/12 grid grid-cols-3 gap-12 mt-4'>
+    <section className='w-11/12 h-full place-content-center grid grid-cols-3 gap-4'>
       <ChartCard title='일별 공정 불량률'>
         <Misconduct start={start} end={end} height='auto' />
       </ChartCard>
