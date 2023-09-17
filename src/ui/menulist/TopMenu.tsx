@@ -1,10 +1,10 @@
 import { useRecoilValue } from 'recoil';
+import { NavLink } from 'react-router-dom';
 
 import { TopNavMenu } from '@ui/menuItems/TopNavMenu';
 
 import { loginState } from '@/features/user/store';
 import { KoreanLinkDescription } from '@/utils/config';
-import { NavLink } from 'react-router-dom';
 
 export const TopMenu = () => {
   const userState = useRecoilValue(loginState);

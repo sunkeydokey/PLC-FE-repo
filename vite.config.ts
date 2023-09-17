@@ -33,7 +33,6 @@ export default defineConfig({
       plugins: [nodePolyfills()],
     },
   },
-
   resolve: {
     alias: {
       util: 'util/',

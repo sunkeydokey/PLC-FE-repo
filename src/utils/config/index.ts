@@ -14,7 +14,7 @@ export const KoreanLinkDescription = [
   { path: '/log', name: '로그', needLogin: true },
   { path: '/profile', name: '관리', needLogin: true },
   { path: '/login', name: '로그인', needLogin: false },
-  { path: '/signup', name: '회원가입', needLogin: false },
+  { path: '/signup', name: '등록', needLogin: false },
   { path: '/logout', name: '로그아웃', needLogin: true },
 ];
 

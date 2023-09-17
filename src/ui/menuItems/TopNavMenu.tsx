@@ -10,7 +10,7 @@ export const TopNavMenu = ({ path, name }: NavProps) => {
     return (
       <Link
         to='/'
-        className='text-stone-400 font-bold hover:text-stone-300 scale-105'>
+        className='text-stone-400 font-bold hover:text-stone-300 hover:scale-105'>
         <button onClick={logout}>로그아웃</button>
       </Link>
     );
@@ -20,7 +20,7 @@ export const TopNavMenu = ({ path, name }: NavProps) => {
       className={({ isActive }) =>
         isActive
           ? 'hidden'
-          : 'text-stone-400 font-bold hover:text-stone-300 scale-105'
+          : 'text-stone-400 font-bold hover:text-stone-300 hover:scale-105'
       }
       to={path}>
       {name}

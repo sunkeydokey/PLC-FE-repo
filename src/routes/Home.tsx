@@ -1,9 +1,9 @@
-import { BackGround } from '@ui/background-images/BackGround';
-
 export const Home = () => {
   return (
-    <BackGround file='home-bg.jpg'>
-      <div className='w-full h-full'></div>
-    </BackGround>
+    <div className='relative'>
+      <div
+        className={`fixed z-10 w-full h-full bg-[url("/background-image/home-bg.jpg")] bg-no-repeat bg-cover`}></div>
+      <div className='flex w-screen left-[-64px] justify-center items-center h-[5000px]'></div>
+    </div>
   );
 };
