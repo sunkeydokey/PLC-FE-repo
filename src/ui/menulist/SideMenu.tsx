@@ -8,7 +8,7 @@ export const SideMenu = ({ needLogin }: { needLogin: boolean }) => {
   const userState = useUserLoggedIn(needLogin);
 
   return (
-    <div className='fixed z-50 w-[64px] mt-20'>
+    <div className='fixed z-50 w-[64px] mt-16'>
       <nav className='w-full flex flex-col'>
         {links
           .filter((link) => link.needLogin === userState?.isLoggedIn)

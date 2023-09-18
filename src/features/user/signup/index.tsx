@@ -4,7 +4,7 @@ import { SignupForm } from '@/features/user/components/forms/SignupForm';
 export const Main = () => {
   return (
     <FormWrapper
-      title={'회원가입'}
+      title={'등록'}
       form={<SignupForm />}
       bg={
         <div

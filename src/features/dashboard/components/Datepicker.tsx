@@ -110,9 +110,9 @@ export const Datepicker = ({
                 onClick={() => setIsPickingStart(true)}
                 className={`${
                   isPickingStart
-                    ? 'text-stone-200 bg-cyan-800 border-cyan-800'
-                    : 'text-stone-800 border-stone-800'
-                } border rounded-md px-2  font-semibold`}>
+                    ? 'text-stone-200 bg-slate-600 border-slate-600'
+                    : 'text-slate-600 border-slate-600'
+                } border-2 rounded-md px-2  font-semibold`}>
                 시작일 선택
               </button>
 
@@ -121,9 +121,9 @@ export const Datepicker = ({
                 onClick={() => setIsPickingStart(false)}
                 className={`${
                   !isPickingStart
-                    ? 'text-stone-200 bg-cyan-800 border-cyan-800'
-                    : 'text-stone-800 border-stone-800'
-                } border rounded-md px-2 font-semibold`}>
+                    ? 'text-stone-200 bg-slate-600 border-slate-600'
+                    : 'text-slate-600 border-slate-600'
+                } border-2 rounded-md px-2 font-semibold`}>
                 종료일 선택
               </button>
             </div>

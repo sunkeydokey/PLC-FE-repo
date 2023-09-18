@@ -4,7 +4,7 @@ export const ProgressBar = () => {
   return (
     <ReactApexChart
       type='radialBar'
-      height={'auto'}
+      height={'110%'}
       options={{
         colors: ['#fef9c3'],
         chart: {
@@ -16,25 +16,16 @@ export const ProgressBar = () => {
         },
         plotOptions: {
           radialBar: {
-            hollow: {
-              margin: 0,
-              size: '70%',
-              background: '#525252',
-            },
             track: {
               dropShadow: {
                 enabled: true,
-                top: 2,
-                left: 0,
                 blur: 4,
                 opacity: 0.15,
               },
             },
             dataLabels: {
               name: {
-                offsetY: 10,
-                color: '#fff',
-                fontSize: '30px',
+                show: false,
               },
               value: {
                 show: false,
@@ -54,7 +45,6 @@ export const ProgressBar = () => {
         stroke: {
           lineCap: 'round',
         },
-        labels: ['Loading...'],
       }}
       series={[90]}
     />

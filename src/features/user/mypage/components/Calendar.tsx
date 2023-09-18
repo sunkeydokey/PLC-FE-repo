@@ -14,8 +14,11 @@ import {
 import { MonthDirection } from '@ui/calendar-items/MonthDirection';
 import { Head } from '@ui/calendar-items/Head';
 import { ScheduleButton } from './ScheduleButton';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '../../store';
 
 export const Calendar = () => {
+  const { email } = useRecoilValue(loginState);
   const today = startOfToday();
 
   // get Month
@@ -49,14 +52,16 @@ export const Calendar = () => {
       <div className='relative flex flex-col mx-2 mb-4 h-full'>
         <Head />
         <div className='grow grid grid-cols-7 text-xs leading-6 text-center border border-stone-300'>
-          {days.map((day) => (
-            <ScheduleButton
-              key={day.toString()}
-              day={day}
-              today={today}
-              firstDayCurrentMonth={firstDayCurrentMonth}
-            />
-          ))}
+          {email &&
+            days.map((day) => (
+              <ScheduleButton
+                key={day.toString()}
+                email={email}
+                day={day}
+                today={today}
+                firstDayCurrentMonth={firstDayCurrentMonth}
+              />
+            ))}
         </div>
       </div>
     </section>

@@ -23,3 +23,5 @@ export const Regex = {
   email:
     /^[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+@[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+(.[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+)+$/,
 };
+
+export const category = ['중요', '행사', '회의', '일정', '완료'];

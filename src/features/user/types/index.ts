@@ -30,3 +30,12 @@ export type LoginState = {
   email: string | null;
   name: string | null;
 };
+
+export type Schedule = {
+  id?: number;
+  email: string;
+  date: string;
+  title: string;
+  description: string;
+  category: string;
+};

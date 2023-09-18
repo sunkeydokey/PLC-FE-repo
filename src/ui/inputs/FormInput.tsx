@@ -12,11 +12,12 @@ export const FormInput = ({
   return (
     <>
       <div className='flex justify-center items-center w-4/5 mx-auto my-1'>
-        <label className='basis-1/5 text-center text-stone-800'>
+        <label className='basis-1/4 text-center text-stone-800'>
           {label}&nbsp;&nbsp;
         </label>
         <input
           placeholder={placeholder}
+          spellCheck={false}
           readOnly={readOnly}
           autoComplete='off'
           className='focus:outline-none text-stone-600 basis-3/5 grow px-4 bg-inherit border-lg border-b border-stone-800'
