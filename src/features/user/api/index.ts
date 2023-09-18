@@ -1,6 +1,6 @@
 import { AxiosInstanceToNest as axios } from '@/utils/lib/axios';
 
-import type { AuthFormValue } from '@/features/user/types';
+import type { AuthFormValue, EditFormValue } from '@/features/user/types';
 
 export const RequestSignup = (data: AuthFormValue) =>
   axios({
@@ -20,5 +20,17 @@ export const RequestLogin = (data: AuthFormValue) =>
     data: {
       email: data['이메일'],
       password: data['비밀번호'],
+    },
+  });
+
+export const RequestEditUserInfo = (data: EditFormValue) =>
+  axios({
+    method: 'PATCH',
+    url: 'auth/change',
+    data: {
+      currentemail: data.currentemail,
+      cngemail: data.cngemail,
+      currentpsw: data.currentpsw,
+      cngpsw: data.cngpsw,
     },
   });

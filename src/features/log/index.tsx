@@ -46,7 +46,7 @@ export const Main = () => {
   return (
     <>
       {/* Download Button */}
-      <section className='fixed right-0 flex justify-end items-center mt-12 mr-4'>
+      <section className='fixed right-0 flex justify-end items-center mt-20 mr-4'>
         <ExcelDownloadButton
           data={data.pages.map((page) =>
             page.results.map((log: LogColumns) => ({

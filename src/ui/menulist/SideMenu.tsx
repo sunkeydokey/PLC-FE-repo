@@ -11,7 +11,7 @@ export const SideMenu = ({ needLogin }: { needLogin: boolean }) => {
     <div className='fixed z-50 w-[64px] mt-20'>
       <nav className='w-full flex flex-col'>
         {links
-          .filter((link) => link.needLogin === userState.isLoggedIn)
+          .filter((link) => link.needLogin === userState?.isLoggedIn)
           .map((link) => (
             <LayoutNavMenu key={link.name} path={link.path} name={link.name} />
           ))}

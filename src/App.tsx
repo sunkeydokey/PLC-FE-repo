@@ -24,9 +24,8 @@ export const App = () => {
         <Route path='/dashboard' element={<DashBoard />} />
         <Route path='/control' element={<Control />} />
         <Route path='/log' element={<Log />} />
-        <Route path='/mypage' element={<MyPage />}>
-          <Route path='/mypage/edit' element={<Edit />}></Route>
-        </Route>
+        <Route path='/mypage' element={<MyPage />} />
+        <Route path='/mypage/edit' element={<Edit />}></Route>
         <Route path='/error' element={<ErrorPage />} />
         <Route path='/*' element={<NotFound />} />
       </Route>

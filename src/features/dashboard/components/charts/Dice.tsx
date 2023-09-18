@@ -55,16 +55,13 @@ export const Dice = ({ start, end, height }: Graph) => {
         },
         yaxis: {
           labels: {
-            style: { colors: ['#292524'] },
+            style: { colors: ['white'] },
           },
         },
         xaxis: {
           categories: data.map((data: Data) => data.TrackId),
           labels: {
             show: false,
-            style: {
-              colors: '#292524',
-            },
           },
         },
       }}

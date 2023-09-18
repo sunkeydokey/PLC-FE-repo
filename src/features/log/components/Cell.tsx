@@ -7,7 +7,7 @@ export const Cell = ({
 }) => {
   return (
     <div
-      className={`basis-auto break-words text-center border border-stone-600 w-full ${
+      className={`basis-auto truncate break-words text-center border border-stone-600 w-full ${
         isError && 'bg-yellow-200'
       }`}>
       {value}

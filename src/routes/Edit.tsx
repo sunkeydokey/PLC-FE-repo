@@ -1,4 +1,4 @@
-import { Main } from '@/features/user/profile/edit';
+import { Main } from '@/features/user/mypage/edit';
 
 export const Edit = () => {
   return <Main />;

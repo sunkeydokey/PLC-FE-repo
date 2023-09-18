@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useResetRecoilState, useRecoilState } from 'recoil';
+// import { useQuery } from '@tanstack/react-query';
 
 import { loginState } from '@/features/user/store';
 import { AxiosInstanceToNest as axios } from '@/utils/lib/axios';
@@ -17,25 +18,33 @@ export const useLogout = () => {
   return Logout;
 };
 
-export const useUserLoggedIn = (needLogin: boolean = false) => {
+export const useUserLoggedIn = (needLogin: boolean) => {
   const [userState, setUserState] = useRecoilState(loginState);
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   useEffect(() => {
+    if (pathname == '/' || pathname == '/error') return;
     const name = localStorage.name;
-    const id = localStorage.id;
+    const email = localStorage.email;
+    // const accessToken = localStorage.accessToken;
+    // if(accessToken){
 
-    if (!userState.isLoggedIn && name && id) {
+    //   const { data } = useQuery(['login'], () => {});
+    // setUserState{
+    // isLoggedIn: true,
+    // ...data
+    // }
+    // }
+
+    if (!userState.isLoggedIn && name && email) {
       setUserState({
         isLoggedIn: true,
         name: name,
-        id: id,
+        email: email,
       });
       return;
     }
-
-    if (pathname == '/') return;
 
     if (needLogin != userState.isLoggedIn) {
       navigate('/');

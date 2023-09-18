@@ -5,6 +5,8 @@ export const FormInput = ({
   register,
   formState,
   registerOptions,
+  readOnly,
+  placeholder = '',
   type,
 }: InputProps) => {
   return (
@@ -14,6 +16,8 @@ export const FormInput = ({
           {label}&nbsp;&nbsp;
         </label>
         <input
+          placeholder={placeholder}
+          readOnly={readOnly}
           autoComplete='off'
           className='focus:outline-none text-stone-600 basis-3/5 grow px-4 bg-inherit border-lg border-b border-stone-800'
           {...register(label, { ...registerOptions })}

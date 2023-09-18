@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { isAxiosError } from 'axios';
 
 import { FormInput } from '@ui/inputs/FormInput';
 
@@ -20,18 +21,20 @@ export const SignupForm = () => {
       비밀번호: '',
     },
   });
-  const [signupMessage, setSignupMessage] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<AuthFormValue> = async (values) => {
     try {
       const { data } = await RequestSignup(values);
       if (data) {
-        setSignupMessage('회원가입에 성공했습니다.');
         navigate('/login');
       }
     } catch (error) {
-      setSignupMessage('회원가입에 실패했습니다.');
+      if (isAxiosError(error)) {
+        const { response } = error;
+        setMessage(response?.data.message);
+      }
     }
   };
 
@@ -46,6 +49,8 @@ export const SignupForm = () => {
           type='text'
           formState={formState}
           register={register}
+          placeholder=''
+          readOnly={false}
           registerOptions={{
             required: {
               value: true,
@@ -71,6 +76,8 @@ export const SignupForm = () => {
           type='email'
           formState={formState}
           register={register}
+          placeholder=''
+          readOnly={false}
           registerOptions={{
             required: {
               value: true,
@@ -88,6 +95,8 @@ export const SignupForm = () => {
           type='password'
           formState={formState}
           register={register}
+          placeholder=''
+          readOnly={false}
           registerOptions={{
             required: {
               value: true,
@@ -99,15 +108,14 @@ export const SignupForm = () => {
             },
           }}
         />
+        <p className='text-red-400 h-4 w-full text-center'>{message}</p>
+
         <div className='flex justify-center gap-4 items-center'>
           <Button isPrimary={true} text='회원가입' type='submit' />
-          <Button
-            isPrimary={false}
-            text={<NavLink to='/login'>로그인</NavLink>}
-            type='button'
-          />
+          <NavLink to='/login'>
+            <Button isPrimary={false} text={'로그인'} type='button' />
+          </NavLink>
         </div>
-        {signupMessage}
       </form>
     </section>
   );

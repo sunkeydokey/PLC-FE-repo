@@ -3,8 +3,16 @@ import type { RegisterOptions } from 'react-hook-form';
 
 export type AuthFormValue = {
   이름?: string;
-  이메일: string;
+  이메일?: string;
   비밀번호: string;
+  변경: string;
+};
+
+export type EditFormValue = {
+  currentemail: string;
+  cngemail: string;
+  currentpsw: string;
+  cngpsw: string;
 };
 
 export type InputProps = {
@@ -13,10 +21,12 @@ export type InputProps = {
   register: UseFormRegister<AuthFormValue>;
   formState: FormState<AuthFormValue>;
   registerOptions?: RegisterOptions;
+  readOnly: boolean;
+  placeholder: string;
 };
 
 export type LoginState = {
   isLoggedIn: boolean;
-  id: number | null;
+  email: string | null;
   name: string | null;
 };

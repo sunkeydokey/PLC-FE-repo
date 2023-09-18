@@ -23,7 +23,7 @@ export const Main = () => {
         isCalendarVisible={isCalendarVisible}
         setIsCalendarVisible={setIsCalendarVisible}
       />
-      <section className='self-end mb-2 mr-10 overflow-hidden border border-stone-200 rounded-md flex divide-x items-center'>
+      <section className='self-end mb-4 mr-10 max-h-[40px] min-h-[40px] overflow-hidden border border-stone-200 rounded-md flex divide-x items-center'>
         <button
           onClick={() => setShowAll(true)}
           className={`px-2 py-2 ${showAll ? 'bg-sky-600' : 'bg-stone-800'}`}>
