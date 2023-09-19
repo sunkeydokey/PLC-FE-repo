@@ -32,6 +32,7 @@ export const LoginForm = () => {
 
       const { accessToken } = data;
       axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
       setStoredToken(accessToken);
 
       navigate('/');
