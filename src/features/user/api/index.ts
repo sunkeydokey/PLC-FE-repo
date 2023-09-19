@@ -13,13 +13,13 @@ export const RequestSignup = (data: AuthFormValue) =>
     },
   });
 
-export const RequestLogin = (data: AuthFormValue) =>
+export const RequestLogin = (loginData: AuthFormValue) =>
   axios({
     method: 'POST',
     url: 'auth/login',
     data: {
-      email: data['이메일'],
-      password: data['비밀번호'],
+      email: loginData['이메일'],
+      password: loginData['비밀번호'],
     },
   });
 

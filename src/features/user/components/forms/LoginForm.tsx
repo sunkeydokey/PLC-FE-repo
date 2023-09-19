@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { isAxiosError } from 'axios';
 
@@ -7,12 +7,11 @@ import { FormInput } from '@ui/inputs/FormInput';
 import { Button } from '@ui/buttons';
 
 import { RequestLogin } from '@/features/user/api';
-import { loginState } from '@/features/user/store';
 import { AxiosInstanceToNest as axios } from '@/utils/lib/axios';
 import { Regex } from '@/utils/config';
 
+import { setStoredToken } from '@/features/user/config';
 import type { AuthFormValue } from '@/features/user/types';
-import { useState } from 'react';
 
 export const LoginForm = () => {
   const { register, handleSubmit, formState } = useForm<AuthFormValue>({
@@ -25,33 +24,17 @@ export const LoginForm = () => {
   });
   const [message, setMessage] = useState('');
 
-  const setLoginState = useSetRecoilState(loginState);
-
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<AuthFormValue> = async (values) => {
     try {
-      const { data, status } = await RequestLogin(values);
+      const { data } = await RequestLogin(values);
 
-      if (status === 201) {
-        const { accessToken, email, name } = data;
-        console.log(email);
-        axios.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${accessToken}`;
+      const { accessToken } = data;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+      setStoredToken(accessToken);
 
-        localStorage['name'] = name;
-        localStorage['email'] = email;
-
-        setLoginState({
-          isLoggedIn: true,
-          email: email,
-          name: name,
-        });
-
-        // localStorage['accessToken'] = accessToken;
-        navigate('/');
-      }
+      navigate('/');
     } catch (error) {
       if (isAxiosError(error)) {
         const { response } = error;

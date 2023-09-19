@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
   Squares2X2Icon,
@@ -11,7 +12,12 @@ import { ListBoard } from '@/features/dashboard/components/ListBoard';
 
 import { showAllAtom } from '@/features/dashboard/store';
 
+import { useUser } from '@/features/user/hooks/useUser';
+
 export const Main = () => {
+  const user = useUser();
+  if (!user) return <Navigate to='/login' />;
+
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [showAll, setShowAll] = useRecoilState(showAllAtom);
 

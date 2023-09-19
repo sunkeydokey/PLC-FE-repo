@@ -15,6 +15,12 @@ export type EditFormValue = {
   cngpsw: string;
 };
 
+export type User = {
+  accessToken: string;
+  email: string;
+  name: string;
+};
+
 export type InputProps = {
   label: Path<AuthFormValue>;
   type: string;
@@ -31,11 +37,14 @@ export type LoginState = {
   name: string | null;
 };
 
-export type Schedule = {
-  id?: number;
+export interface Schedule {
   email: string;
   date: string;
   title: string;
   description: string;
   category: string;
-};
+}
+
+export interface receivedSchedule extends Schedule {
+  id: number;
+}

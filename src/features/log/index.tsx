@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { Navigate } from 'react-router-dom';
 
 import { TableHead } from '@/features/log/components/TableHead';
 import { TableRow } from '@/features/log/components/TableRow';
@@ -10,13 +11,19 @@ import { requestMachineLog } from '@/features/log/api/index';
 import { LogColumns } from '@/features/log/types';
 import { FetchHandler } from '@ui/fetchingHandlers/FetchHandler';
 
+import { useUser } from '@/features/user/hooks/useUser';
+
 export const Main = () => {
+  const user = useUser();
+  if (!user) return <Navigate to='/login' />;
+
   const { data, fetchNextPage, hasNextPage, isLoading, isError } =
     useInfiniteQuery(
       ['log'],
       ({ pageParam = '/page?num=0' }) => requestMachineLog(pageParam),
       {
         getNextPageParam: (lastPage) => lastPage.next || undefined,
+        refetchOnMount: true,
       },
     );
 

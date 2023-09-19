@@ -19,10 +19,12 @@ export const ScheduleButton = ({
   firstDayCurrentMonth: Date;
 }) => {
   if (!email) return;
+
   const [isOpen, setIsOpen] = useState(false);
   const DATE = format(day, 'yyyy-MM-dd');
-  const { data, isLoading, isError } = useQuery(['ScheduleOfDate', DATE], () =>
-    requestScheduleOfDate(DATE, email),
+  const { data, isLoading, isError } = useQuery(
+    ['ScheduleOfDate', DATE + email],
+    () => requestScheduleOfDate(DATE, email),
   );
 
   const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,7 +36,6 @@ export const ScheduleButton = ({
   };
   if (isLoading) <div>loading</div>;
   if (isError) <div>error</div>;
-  if (data && data.length) console.log(data);
 
   return (
     <div className={`flex flex-col border w-full h-full overflow-hidden`}>

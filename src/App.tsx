@@ -18,22 +18,19 @@ import { Layout } from '@/ui/Layout';
 
 export const App = () => {
   return (
-    <Routes>
-      <Route element={<Layout needLogin={true} />}>
+    <Layout>
+      <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/dashboard' element={<DashBoard />} />
         <Route path='/control' element={<Control />} />
         <Route path='/log' element={<Log />} />
-        <Route path='/mypage' element={<MyPage />} />
+        <Route path='/mypage/' element={<MyPage />} />
         <Route path='/mypage/edit' element={<Edit />}></Route>
-        <Route path='/error' element={<ErrorPage />} />
-        <Route path='/*' element={<NotFound />} />
-      </Route>
-      <Route element={<Layout needLogin={false} />}>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/error' element={<ErrorPage />} />
         <Route path='/*' element={<NotFound />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </Layout>
   );
 };

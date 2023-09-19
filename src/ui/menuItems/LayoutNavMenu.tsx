@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { SVG } from '@ui/SVG';
 
-import { useLogout } from '@/features/user/hooks';
+import { useLogout } from '@/features/user/hooks/useLogout';
 
 import type { NavProps } from '@ui/types';
 

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { ListBulletIcon } from '@heroicons/react/20/solid';
+import { ListBulletIcon, XMarkIcon } from '@heroicons/react/20/solid';
 
 import { category } from '@/utils/config';
 
@@ -15,6 +15,7 @@ export const Modal = ({
   setDescription,
   selected,
   setSelected,
+  message,
   children,
 }: {
   closeModal: () => void;
@@ -29,7 +30,8 @@ export const Modal = ({
   ) => void;
   children: ReactNode;
   selected: string;
-  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  setSelected: (value: string) => void;
+  message: string;
 }) => {
   return (
     <div
@@ -37,7 +39,10 @@ export const Modal = ({
       className='fixed inset-0 flex justify-center items-center z-50 bg-slate-600/60'>
       <section
         onClick={(event) => event.stopPropagation()}
-        className='bg-slate-800 flex items-center mx-4 overflow-hidden w-1/2 h-3/4 rounded-xl shadow-lg py-8'>
+        className='bg-slate-800 relative flex items-center mx-4 overflow-hidden w-1/2 h-3/4 rounded-xl shadow-lg py-8'>
+        <button onClick={closeModal} className='absolute right-0 top-0 z-50'>
+          <XMarkIcon className='fill-slate-200 w-10 h-10' />
+        </button>
         <div className='grow flex flex-col items-center justify-start w-full h-full'>
           <p className='w-3/4 mt-4 px-2 text-start text-stone-200 text-lg'>
             {date}
@@ -100,6 +105,7 @@ export const Modal = ({
             value={description}
             onChange={setDescription}
           />
+          <p className='h-8 w-full'>{message}</p>
           {children}
         </div>
       </section>

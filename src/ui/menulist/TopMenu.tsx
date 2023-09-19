@@ -1,13 +1,12 @@
-import { useRecoilValue } from 'recoil';
 import { NavLink } from 'react-router-dom';
 
 import { TopNavMenu } from '@ui/menuItems/TopNavMenu';
 
-import { loginState } from '@/features/user/store';
 import { KoreanLinkDescription } from '@/utils/config';
+import { useUser } from '@/features/user/hooks/useUser';
 
 export const TopMenu = () => {
-  const userState = useRecoilValue(loginState);
+  const user = useUser();
 
   return (
     <div className='flex justify-between py-3 mx-5 items-center'>
@@ -15,17 +14,23 @@ export const TopMenu = () => {
         Trace
       </NavLink>
       <div className='flex justify-end gap-5'>
-        {userState.isLoggedIn && (
+        {user && (
           <p className='text-white hidden sm:inline-block'>
-            {userState.name}님 안녕하세요!
+            {user.name}님 안녕하세요!
           </p>
         )}
         <nav className='flex gap-4'>
-          {KoreanLinkDescription.filter(
-            (link) => link.needLogin === userState.isLoggedIn,
-          ).map((link) => (
-            <TopNavMenu key={link.name} path={link.path} name={link.name} />
-          ))}
+          {user
+            ? KoreanLinkDescription.filter(
+                (link) => link.needLogin === true,
+              ).map((link) => (
+                <TopNavMenu key={link.name} path={link.path} name={link.name} />
+              ))
+            : KoreanLinkDescription.filter(
+                (link) => link.needLogin === false,
+              ).map((link) => (
+                <TopNavMenu key={link.name} path={link.path} name={link.name} />
+              ))}
         </nav>
       </div>
     </div>

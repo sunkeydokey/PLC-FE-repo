@@ -4,15 +4,7 @@ import { EditSchedule } from '@/features/user/mypage/components/handle-schedule/
 
 import { receivedSchedule } from '@/features/user/types';
 
-const bgColor: { [key: string]: string } = {
-  중요: 'bg-pink-400',
-  행사: 'bg-sky-500',
-  회의: 'bg-amber-600',
-  일정: 'bg-green-700',
-  완료: 'bg-gray-900',
-};
-
-export const ScheduleItem = ({
+export const TaskItem = ({
   date,
   title,
   category,
@@ -44,7 +36,7 @@ export const ScheduleItem = ({
       )}
       <button
         onClick={openModal}
-        className={`${bgColor[category]} border text-stone-200 font-bold w-[95%] trucate self-center overflow-hidden mb-0.5`}>
+        className='border rounded-md px-1 text-stone-800 font-bold mb-0.5 bg-slate-100'>
         {title}
       </button>
     </>

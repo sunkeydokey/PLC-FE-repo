@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 import { Model } from '@/features/machine/components/3D-Models';
 import { SlideInput } from '@ui/inputs/SlideInput';
@@ -59,13 +60,11 @@ export const Modal = ({
               )
             ) : (
               <>
-                <section className='absolute right-0 top-0 z-50 justify-center'>
-                  <button
-                    onClick={closeModal}
-                    className='px-4 py-2 text-white font-extrabold text-2xl'>
-                    X
-                  </button>
-                </section>
+                <button
+                  onClick={closeModal}
+                  className='absolute right-0 top-0 z-50'>
+                  <XMarkIcon className='fill-slate-200 w-10 h-10' />
+                </button>
                 <section className='w-full'>
                   <h2 className='text-xl w-full font-bold mb-4 text-stone-200'>{`${TrackId}번 공정 기록`}</h2>
 

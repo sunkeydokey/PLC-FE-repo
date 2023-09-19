@@ -1,9 +1,12 @@
-import { loginState } from '@/features/user/store';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
-export const UserInfo = () => {
-  const { name, email } = useRecoilValue(loginState);
+export const UserInfo = ({
+  name,
+  email,
+}: {
+  name: string | undefined;
+  email: string | undefined;
+}) => {
   return (
     <div className='flex justify-between w-full items-center rounded-full bg-slate-600'>
       <div className='rounded-full ring-sky-200 ring-2 bg-pink-500/80 text-center w-16 h-16 flex justify-items-center'>

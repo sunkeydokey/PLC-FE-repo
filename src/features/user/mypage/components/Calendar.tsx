@@ -14,11 +14,8 @@ import {
 import { MonthDirection } from '@ui/calendar-items/MonthDirection';
 import { Head } from '@ui/calendar-items/Head';
 import { ScheduleButton } from './ScheduleButton';
-import { useRecoilValue } from 'recoil';
-import { loginState } from '../../store';
 
-export const Calendar = () => {
-  const { email } = useRecoilValue(loginState);
+export const Calendar = ({ email }: { email: string | undefined }) => {
   const today = startOfToday();
 
   // get Month

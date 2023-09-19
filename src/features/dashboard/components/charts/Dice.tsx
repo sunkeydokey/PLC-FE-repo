@@ -36,11 +36,11 @@ export const Dice = ({ start, end, height }: Graph) => {
               label: {
                 borderColor: '#292524',
                 borderRadius: 8,
-                offsetY: -10,
+                offsetY: 30,
                 style: {
                   color: '#292524',
                   background: '#99f6e4',
-                  fontSize: '16px',
+                  fontSize: '12px',
                   padding: { top: 4, bottom: 4, left: 4, right: 4 },
                 },
                 text: '정상규격',

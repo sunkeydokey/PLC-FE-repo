@@ -1,12 +1,17 @@
 import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import { Connector } from '@/features/machine/components/Connector';
 
 import { Model } from '@/features/machine/components/3D-Models';
 
 import { SlideInput } from '@ui/inputs/SlideInput';
+import { useUser } from '@/features/user/hooks/useUser';
 
 export const Main = () => {
+  const user = useUser();
+  if (!user) return <Navigate to='/login' />;
+
   const [scale, setScale] = useState(0.7);
   const [isOnMove, setIsOnMove] = useState(false);
   const [platePusher, setPlatePusher] = useState(0);

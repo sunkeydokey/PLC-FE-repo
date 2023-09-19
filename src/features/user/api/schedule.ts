@@ -1,5 +1,5 @@
 import { AxiosInstanceToNest as axios } from '@/utils/lib/axios';
-import { Schedule } from '@/features/user/types';
+import { Schedule, receivedSchedule } from '@/features/user/types';
 
 export const requestPostSchedule = (data: Schedule) =>
   axios({
@@ -11,7 +11,7 @@ export const requestPostSchedule = (data: Schedule) =>
 export const requestScheduleOfDate = async (
   date: string,
   email: string,
-): Promise<Schedule[]> => {
+): Promise<receivedSchedule[]> => {
   const { data } = await axios({
     method: 'GET',
     url: `/schedule/getmyschedule?date=${date}&email=${email}`,
@@ -23,15 +23,13 @@ export const requestUpdateSchedule = async (scheduleData: {
   id: number | undefined;
   title: string;
   description: string;
-  cateory: string;
-}): Promise<Schedule[]> => {
-  const { data } = await axios({
+  category: string;
+}) => {
+  await axios({
     method: 'PATCH',
     url: '/schedule/updateschedule',
     data: scheduleData,
   });
-  console.log(data, 'edit');
-  return data;
 };
 
 export const requestDeleteSchedule = async (scheduleInfo: {
@@ -43,6 +41,5 @@ export const requestDeleteSchedule = async (scheduleInfo: {
     url: '/schedule/deleteschedule',
     data: scheduleInfo,
   });
-  console.log(data, 'delete');
   return data;
 };
