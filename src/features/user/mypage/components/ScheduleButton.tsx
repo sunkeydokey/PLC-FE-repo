@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Navigate } from 'react-router-dom';
 import { format, isEqual, isSameMonth } from 'date-fns';
 import { PlusIcon } from '@heroicons/react/24/solid';
 
@@ -22,9 +23,8 @@ export const ScheduleButton = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const DATE = format(day, 'yyyy-MM-dd');
-  const { data, isLoading, isError } = useQuery(
-    ['ScheduleOfDate', DATE + email],
-    () => requestScheduleOfDate(DATE, email),
+  const { data, isError } = useQuery(['ScheduleOfDate', DATE + email], () =>
+    requestScheduleOfDate(DATE, email),
   );
 
   const openModal = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,9 +34,7 @@ export const ScheduleButton = ({
   const closeModal = () => {
     setIsOpen(false);
   };
-  if (isLoading) <div>loading</div>;
-  if (isError) <div>error</div>;
-
+  if (isError) return <Navigate to='/error' />;
   return (
     <div className={`flex flex-col border w-full h-full overflow-hidden`}>
       {isOpen && (

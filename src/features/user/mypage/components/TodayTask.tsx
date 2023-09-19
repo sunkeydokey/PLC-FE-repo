@@ -1,17 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
+import { Navigate } from 'react-router-dom';
 import { format, startOfToday } from 'date-fns';
-import { requestScheduleOfDate } from '../../api/schedule';
-import { TaskItem } from './TaskItem';
 
-export const TodayTask = ({ email }: { email: string | undefined }) => {
+import { TaskItem } from '@/features/user/mypage/components/TaskItem';
+
+import { requestScheduleOfDate } from '../../api/schedule';
+
+export const TodayTask = ({ email }: { email: string }) => {
   const today = startOfToday();
   const DATE = format(today, 'yyyy-MM-dd');
-  const { data, isLoading, isError } = useQuery(
+  const { data, isError } = useQuery(
     ['ScheduleOfDate', DATE + email],
     () => requestScheduleOfDate(DATE, email as string),
     {},
   );
-  if (!email) return <div>데이터를 불러 올 수 없음</div>;
+
+  if (isError) return <Navigate to='/error' />;
+
   return (
     <div className='grow flex flex-col w-full rounded-lg bg-slate-600'>
       <article className='flex flex-col w-full h-full items-start px-2 mt-1 border-b'>
