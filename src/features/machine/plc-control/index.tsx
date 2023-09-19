@@ -10,7 +10,6 @@ import { useUser } from '@/features/user/hooks/useUser';
 
 export const Main = () => {
   const user = useUser();
-  if (!user) return <Navigate to='/login' />;
 
   const [scale, setScale] = useState(0.7);
   const [isOnMove, setIsOnMove] = useState(false);
@@ -19,6 +18,7 @@ export const Main = () => {
   const [peekAngle, setPeekAngle] = useState(20);
   const [peekHeight, setPeekHeight] = useState(0);
 
+  if (!user) return <Navigate to='/login' />;
   return (
     <div className='w-full h-full flex'>
       <aside className='mx-4 w-80 h-full flex flex-col justify-start'>

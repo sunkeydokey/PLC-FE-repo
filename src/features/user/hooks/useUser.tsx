@@ -34,6 +34,9 @@ export const useUser = () => {
       onSuccess: (received) => {
         if (!received) clearStoredToken();
       },
+      initialData: token
+        ? { name: '사용자를 불러오는 중', email: 'unknown@user.io' }
+        : undefined,
     },
   );
 
