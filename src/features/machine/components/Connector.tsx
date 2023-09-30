@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { connect } from 'mqtt';
-
+import * as mqtt from 'mqtt/dist/mqtt.min';
 import { ConditionalButton } from '@ui/buttons/ConditionalButton';
 
 import type { MqttClient } from 'mqtt';
@@ -75,7 +74,7 @@ export const Connector = ({
   };
 
   useEffect(() => {
-    const client = connect(mqttURL, {
+    const client = mqtt.connect(mqttURL, {
       port: mqttPort,
       protocol: 'ws',
     });
